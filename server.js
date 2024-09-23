@@ -73,26 +73,10 @@ app.post('/logout', function(req, res, next) {
 function isAuthenticated(req, res, next) {
     //console.log(req)
     if (req.isAuthenticated()) { return next(); }
-    res.redirect('/')
+    else{
+        res.sendStatus(400)
+    }
 }
-
-//send index html at root url
-// app.get('/table', isAuthenticated,(req, res) => {
-//     console.log("HIHIHI")
-//     console.log(req.user.id)
-//
-//     res.sendFile('/public/index.html', {root: __dirname})
-// })
-//
-// app.get('/', (req, res) => {
-//     res.sendFile('/public/login.html', {root: __dirname})
-// })
-
-
-// allow all files in public to be served
-// app.use(express.static('public'))
-// allow all files from root
-app.use('/purecss',express.static('node_modules/purecss/build'))
 
 //send back fantasy football data from database (will need to change this to be by user)
 app.get('/FFtable',isAuthenticated, async (req, res) => {
@@ -146,9 +130,9 @@ app.post('/submit',isAuthenticated, async (req, res) => {
         //add to database
         await client.connect()
         let playersTable = await client.db(Dbname).collection("Players")
-        await playersTable.insertOne(newRecord)
+        let newID = (await playersTable.insertOne(newRecord)).insertedId
         res.status(200)
-        res.send("Post ok")
+        res.send(newID.toString())
     }
     else{
         res.status(200)
@@ -236,12 +220,4 @@ function recordIsVaild(newRecord){
 
 }
 
-// app.get('/pureCss/*',async (req, res) => {
-//     res.sendFile(pureCss.getFilePath(req.path.split('/')[2]))
-// })
-
-//start server on port
-// app.listen(process.env.PORT || port, () => {
-//     console.log(`Listening on port ${port}`)
-// })
 ViteExpress.listen( app, 3000, () => console.log("Server is listening...") )
