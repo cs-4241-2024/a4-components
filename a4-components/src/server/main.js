@@ -1,13 +1,10 @@
 // Express Server
-const express = require( 'express' ),
-    cookie  = require( 'cookie-session' ),
-    app = express()
+import 'dotenv/config'
+import express from 'express'
 import ViteExpress from 'vite-express'
-require('dotenv').config()
-
-// Mongo DB
-const { MongoClient, ObjectId } = require('mongodb');
-
+import cookie from 'cookie-session'
+import { MongoClient, ObjectId } from 'mongodb'
+const app = express()
 
 
 app.use(express.static('views'))
@@ -191,8 +188,5 @@ app.post( '/update', async (req,res) => {
 
   res.json( result )
 })
-
-
-app.listen( process.env.PORT || 3000 )
 
 ViteExpress.listen( app, 3000 )
