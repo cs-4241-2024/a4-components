@@ -3,15 +3,15 @@
 /* Used color palette from https://coolors.co/palette/dad7cd-a3b18a-588157-3a5a40-344e41 */
 :root {
   --first-alt:
-  #143109;
+          #143109;
   --second-alt:
-  #AAAE7F;
+          #AAAE7F;
   --third-alt:
-  #D0D6B3;
+          #D0D6B3;
   --fourth-alt:
-  #EFEFEF;
+          #EFEFEF;
   --fifth-alt:
-  #F7F7F7;
+          #F7F7F7;
 
   --first: #344e41;
   --second: #3a5a40;
