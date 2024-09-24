@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import Table from "./components/Table";
 import { Student } from "../server/main";
+import Stats from "./components/Stats";
 
 function App() {
     const [ students, setStudents ] = useState<Student[]>( [] );
@@ -50,7 +51,7 @@ function App() {
             <h1>Student Grade Table</h1>
             <Form addStudent={addStudent}/>
             <Table students={students} deleteStudent={deleteStudent}/>
-
+            <Stats students={students}/>
         </div>
     );
 }
