@@ -3,12 +3,18 @@ import ViteExpress from "vite-express";
 import cookieSession from "cookie-session";
 import mongodb from "mongodb"
 
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const cookie = cookieSession,
       { MongoClient, ObjectId } = mongodb,
       app = express();
 
-app.use(express.static('views') )
-app.use(express.static('public') )
+//app.use(express.static('views') )
+//app.use(express.static('public') )
 app.use(express.json())
 app.use(express.urlencoded({extended: true }));
 
@@ -50,7 +56,8 @@ async function run() {
      let count2 = await collection.count({username: req.body.username}, {limit: 1})
      if(count2){
        // password incorrect, redirect back to login page
-       res.sendFile( __dirname + '/views/index.html' )
+       //res.sendFile( __dirname + '/../client/index.html' )
+       res.sendFile( 'index.html', {'root': __dirname + '/../client/' })
      }else{
     let values = {username: req.body.username, password: req.body.password};
     await collection.insertOne(values)
@@ -65,11 +72,12 @@ async function run() {
     if( req.session.login === true )
       next()
     else
-      res.sendFile( __dirname + '/views/index.html' )
+      res.sendFile( 'index.html', {'root': __dirname + '/../client/' })
+      //res.redirect('/../client/index.html')
   })
 
   // serve up static files in the directory public
-  app.use( express.static('views') )
+  //app.use( express.static('views') )
 
   const listener = app.listen( process.env.PORT || 3000 )
 
