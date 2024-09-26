@@ -62,7 +62,7 @@ app.post( '/login', async (req,res)=> {
     // define a variable that we can check in other middleware
     // the session object is added to our requests by the cookie-session middleware
     req.session.user = loginDoc.user
-    req.session.login = true
+    req.session.loginFunc = true
 
     // since login was successful, send the user to the main content
     // use redirect to avoid authentication problems when refreshing
@@ -73,17 +73,17 @@ app.post( '/login', async (req,res)=> {
     console.log("not found")
     res.status(400).send("Either Login or Password are incorrect")
     // password incorrect, redirect back to login page
-    res.sendFile( __dirname + '/views/index.html' )
+    // res.sendFile( __dirname + '/views/index.html' )
   }
 })
 
 // add some middleware that always sends unauthenicaetd users to the login page
-app.use( function( req,res,next) {
-  if( req.session.login === true )
-    next()
-  else
-    res.sendFile( __dirname + '/public/main.html' )
-})
+// app.use( function( req,res,next) {
+//   if( req.session.login === true )
+//     next()
+//   else
+//     res.sendFile( __dirname + '/public/main.html' )
+// })
 
 app.use('/newLogin', async (req, res) => {
   console.log( req.body )
