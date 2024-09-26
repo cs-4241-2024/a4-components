@@ -8,6 +8,9 @@
     "start": "cross-env NODE_ENV=production node src/server/main.js",
     "build": "vite build"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "cookie-session": "^2.1.0",
     "dotenv": "^16.4.5",
