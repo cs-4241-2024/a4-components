@@ -26,7 +26,7 @@ Sample Readme (delete the above when you're ready to submit, and modify the belo
 
 ## Your Web Application Title
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-smoliner1.glitch.me/
 
 Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
 
