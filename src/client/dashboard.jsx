@@ -18,13 +18,6 @@ window.onload = async function() {
     });
 
 
-    // window.onclick = function(event) {
-    //     if (event.target === document.getElementById('editModal')) {
-    //         document.getElementById('editModal').style.display = 'none';
-    //     }
-    // };
-
-
 }
 async function onLogout(event, navigate) {
 
@@ -32,7 +25,7 @@ async function onLogout(event, navigate) {
         method: 'GET',
     });
     if (response.ok) {
-        navigate('/'); // Redirect to the root URL
+        window.location.href='/'; // Redirect to the root URL
     } else {
         console.error('Logout failed');
     }

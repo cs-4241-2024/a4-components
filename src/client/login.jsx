@@ -17,8 +17,7 @@ async function loginFunc(event, navigate) {
   console.log(response.status);
   if (response.status === 200) {
     alert("Login Successful");
-    console.log("Login Successful");
-    return navigate('/dashboard');
+    window.location.href='/dashboard';
   } else {
     alert("Login failed");
   }
