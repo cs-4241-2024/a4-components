@@ -25,24 +25,55 @@ async function run() {
   await client.connect()
   collection = await client.db("datatest").collection("test")
   console.log("Connected to DB...");
-}
 
-app.post("/login", (req, res) => {
-  if (true) {
-    return res.json({ success: true, redirectUrl: "/home" });
-  } 
-})
+  app.post("/login", async (req, res) => {
+    let count = await collection.count({username: req.body.username, password: req.body.password}, {limit: 1})
+    if( count ) {
+    // define a variable that we can check in other middleware
+    // the session object is added to our requests by the cookie-session middleware
+      req.session.login = true
+      req.session.username = req.body.username
+      console.log( req.session ) 
+
+    // since login was successful, send the user to the main content
+    // use redirect to avoid authentication problems when refreshing
+    // the page or using the back button, for details see:
+    // https://stackoverflow.com/questions/10827242/understanding-the-post-redirect-get-pattern 
+      return res.json({ success: true, redirectUrl: "/home" });
+    }else{
+      let count2 = await collection.count({username: req.body.username}, {limit: 1})
+      if(count2){
+      // password incorrect, redirect back to login page
+        return res.json({ success: true, redirectUrl: "/" });
+      }else{
+        let values = {username: req.body.username, password: req.body.password};
+        await collection.insertOne(values)
+        req.session.login = true
+        return res.json({ success: true, redirectUrl: "/home" });
+      }
+    }
+ })
+
+ /*app.use( function( req,res,next) {
+  if( req.session.login === true ){
+    console.log("1")
+    next()}
+  else{
+    console.log("2")
+    return res.json({ success: true, redirectUrl: "/" });}
+})*/
 
 app.get("/docs", async (req, res) => {
+  console.log("In docs")
   if (collection !== null) {
     const docs = await collection.find({id: req.session.username}).toArray()
-    console.log(docs)
-    res.json( docs )
+    console.log("Docs" + docs)
+    res.json( JSON.stringify(docs) )
   }
 })
 
 app.post( '/submit', async (request,response) => {
-  console.log(request.body)
+  //console.log(request.body)
   let score = request.body.score
   let rank = ''
   if(Number(score) < 1000) {
@@ -58,23 +89,25 @@ app.post( '/submit', async (request,response) => {
   } else {
     rank = 'S'
   }
-  console.log( request.session )
+  //console.log( request.session )
   let _id = {id: request.session.username}
-  console.log(_id)
+  //console.log(_id)
   let values = {id: request.session.username, yourname: request.body.yourname, game: request.body.game, score: request.body.score, rank: rank};
   let result = await collection.insertOne(values)
-  response.json(result)
+  const docs = await collection.find({id: request.session.username}).toArray()
+  //console.log(JSON.stringify({"success":true, "result":result, "docs":docs}));
+  response.json(docs)
 })
 
 app.post( '/delete', async (request,response) => {
-  console.log(request.body)
-  console.log( request.session )
+  //console.log(request.body)
+  //console.log( request.session )
   let _id = {id: request.session.username}
-  console.log(_id)
+  //console.log(_id)
   let values = {id: request.session.username, yourname: request.body.yourname, game: request.body.game, score: request.body.score}
   const result = await collection.deleteOne(values)
-
-  response.json( result )
+  const docs = await collection.find({id: request.session.username}).toArray()
+  response.json(docs)
 })
 
 app.post( '/modify', async (request,response) => {
@@ -94,16 +127,17 @@ app.post( '/modify', async (request,response) => {
   } else {
     rank = 'S'
   }
-  console.log( request.session )
+  //console.log( request.session )
   let _id = {id: request.session.username}
-  console.log(_id)
+  //console.log(_id)
   let values = {id: request.session.username, yourname: request.body.yourname1, game: request.body.game1, score: request.body.score1};
   const result = await collection.updateOne(values,
     { $set: {yourname: request.body.yourname2, game: request.body.game2, score: request.body.score2, rank: rank} }
   )
-
-  response.json( result )
+  const docs = await collection.find({id: request.session.username}).toArray()
+  response.json(docs)
 })
+}
 
 run().catch(console.dir);
 
