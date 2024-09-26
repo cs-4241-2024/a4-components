@@ -39,6 +39,7 @@ async function onLogout(event, navigate) {
 
 function Dashboard() {
     const navigate = useNavigate()
+    const [isModalOpen, openCloseModal] = useState(false)
     return (
         <>
             <h1 className="title is-family-primary is-size-1 pt-6 is-flex is-flex-direction-row">Submit your Match! <button
