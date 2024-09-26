@@ -1,3 +1,4 @@
+import {generateMatches} from "./matches.jsx";
 
 
 export const add = async function(event) {
@@ -183,7 +184,7 @@ export default function form() {
             </table>
         </div>
         <div className="mt-2 submit-clear flex-horizontal is-justify-content-end is-align-items-end">
-            <input type="submit" id="add" className="button is-link" value="Submit"/>
+            <input type="submit" id="add" className="button is-link" value="Submit" onClick={add}/>
             <button type="reset" className="ml-2 button is-link is-light">Clear</button>
         </div>
     </form>

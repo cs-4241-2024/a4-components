@@ -7,7 +7,8 @@ import {useState} from "react";
 
 window.onload = async function() {
     await generateMatches()
-
+    const changeButton = document.querySelector('input[name="changeButton"]');
+    changeButton.onclick = editMatch;
 
     document.querySelector('.modal-close').addEventListener('click', () => {
         document.getElementById('editModal').style.display = 'none';
