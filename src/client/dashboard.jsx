@@ -25,7 +25,8 @@ async function onLogout(event, navigate) {
         method: 'GET',
     });
     if (response.ok) {
-        window.location.href='/'; // Redirect to the root URL
+        navigate('/');
+        // window.location.href='/'; // Redirect to the root URL
     } else {
         console.error('Logout failed');
     }
