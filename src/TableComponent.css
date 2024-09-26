@@ -1,0 +1,8 @@
+.actions {
+    display: flex; /* Use flexbox to align buttons horizontally */
+    gap: 10px; /* Add space between buttons */
+}
+
+.edit-button, .delete-button {
+    display: inline-block; /* Ensure buttons are displayed inline */
+}
