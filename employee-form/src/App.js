@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -10,6 +10,23 @@ function App() {
   });
 
   const [employeeList, setEmployeeList] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+
+  // Load employees from localStorage on initial render
+  useEffect(() => {
+    const savedEmployees = JSON.parse(localStorage.getItem('employees'));
+    if (savedEmployees) {
+      setEmployeeList(savedEmployees);
+    }
+  }, []);
+
+  // Save employees to localStorage whenever the employeeList changes
+  useEffect(() => {
+    if (employeeList.length > 0) {
+      localStorage.setItem('employees', JSON.stringify(employeeList)); // Save to localStorage on every update
+    }
+  }, [employeeList]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -22,13 +39,23 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    const expirationYear = parseInt(employeeData.regDate) + 5; // Example expiration year logic
+    const expirationYear = parseInt(employeeData.regDate) + 5;
     const newEmployee = {
       ...employeeData,
       expirationYear
     };
-    setEmployeeList([...employeeList, newEmployee]);
-    
+
+    if (isEditing) {
+      const updatedList = employeeList.map((emp, index) => 
+        index === editIndex ? newEmployee : emp
+      );
+      setEmployeeList(updatedList);
+      setIsEditing(false);
+      setEditIndex(null);
+    } else {
+      setEmployeeList([...employeeList, newEmployee]);
+    }
+
     // Reset form
     setEmployeeData({
       employeeId: '',
@@ -36,6 +63,23 @@ function App() {
       salary: '',
       regDate: ''
     });
+  };
+
+  const handleEdit = (index) => {
+    const employeeToEdit = employeeList[index];
+    setEmployeeData({
+      employeeId: employeeToEdit.employeeId,
+      name: employeeToEdit.name,
+      salary: employeeToEdit.salary,
+      regDate: employeeToEdit.regDate
+    });
+    setIsEditing(true);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    const updatedList = employeeList.filter((_, i) => i !== index);
+    setEmployeeList(updatedList);
   };
 
   return (
@@ -77,7 +121,7 @@ function App() {
           placeholder="ID registration year" 
           required
         />
-        <button type="submit">Submit</button>
+        <button type="submit">{isEditing ? 'Update' : 'Submit'}</button>
       </form>
 
       <table id="employeeTable">
@@ -88,6 +132,7 @@ function App() {
             <th>Salary</th>
             <th>Registration Year</th>
             <th>Expiration Year</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -98,6 +143,10 @@ function App() {
               <td>{employee.salary}</td>
               <td>{employee.regDate}</td>
               <td>{employee.expirationYear}</td>
+              <td>
+                <button onClick={() => handleEdit(index)}>Edit</button>
+                <button onClick={() => handleDelete(index)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
