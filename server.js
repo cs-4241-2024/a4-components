@@ -44,7 +44,7 @@ const Activity = mongoose.model('Activity', activitySchema);
 // GitHub OAuth Setup
 passport.use(new GitHubStrategy({
         clientID: 'Ov23liWVmeftceR3mKHf',
-        clientSecret: '02d6bd32ca23b0ffc9414d863a88d0d1e528b6ee',
+        clientSecret: 'a44c815614194a428446ce7c2e45631130d627f6',
         callbackURL: 'https://a4-yunynl.onrender.com/auth/github/callback'
 
     },
@@ -71,7 +71,7 @@ function ensureAuthenticated(req, res, next) {
 
 // Serve login page at root
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));  // Serve the login page
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));  // Serve the login page
 });
 
 // GitHub Authentication Routes
@@ -85,13 +85,6 @@ app.get('/auth/github/callback', passport.authenticate('github', { failureRedire
 );
 
 // Logout route
-// app.get('/logout', (req, res, next) => {
-//     req.logout(function(err) {
-//         if (err) { return next(err); }
-//         req.session.destroy();
-//         res.redirect('/');  // Redirect to the login page after logging out
-//     });
-// });
 app.get('/logout', (req, res, next) => {
     req.logout(function(err) {
         if (err) { return next(err); }
@@ -101,46 +94,57 @@ app.get('/logout', (req, res, next) => {
 });
 
 // Serve the index page for authenticated users
-app.get('/index', ensureAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));  // Serve the index page only at /index
+app.use(ensureAuthenticated, express.static(path.join(__dirname, 'client/public')));
+
+// For any other route, serve the React app (index.html in the client/build folder)
+app.get('*', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/public', 'index.html'));  // Serve the React app
 });
 
-// Route to add an activity (User-specific)
+// Routes for managing activities
 app.post('/addActivity', ensureAuthenticated, async (req, res) => {
     const { activityType, details } = req.body;
-    const username = req.session.username;  // Get the logged-in user's username
+    const username = req.session.username;
+
+    console.log('Add Activity Request:', { activityType, details, username });
+
+    if (!activityType || !details) {
+        return res.status(400).json({ message: 'Activity type and details are required.' });
+    }
 
     try {
         const newActivity = new Activity({ username, activityType, details });
         await newActivity.save();
-        res.json({ message: 'Activity saved successfully!' });
+        res.json({ message: 'Activity saved successfully!', activity: newActivity });
     } catch (error) {
+        console.error('Error saving activity:', error);
         res.status(500).json({ message: 'Error saving activity', error });
     }
 });
 
-
-app.get('/getActivities', ensureAuthenticated, async (req, res) => {
-    const username = req.session.username;  // Get the logged-in user's username
+app.get('./getActivities', ensureAuthenticated, async (req, res) => {
+    const username = req.session.username;
 
     try {
-        const activities = await Activity.find({ username });  // Fetch activities from MongoDB
-        res.json(activities);
+        const activities = await Activity.find({ username });
+        res.json(activities); // Make sure to send a JSON response
     } catch (error) {
+        console.error('Error fetching activities:', error);
         res.status(500).json({ message: 'Error fetching activities', error });
     }
 });
 
-// Route to update an activity (User-specific)
+
+
 app.post('/updateActivity', ensureAuthenticated, async (req, res) => {
     const { activityId, activityType, details } = req.body;
-    const username = req.session.username;  // Get the logged-in user's username
+    const username = req.session.username;
 
     try {
         const updatedActivity = await Activity.findOneAndUpdate(
             { _id: activityId, username },
             { activityType, details },
-            { new: true }  // Return the updated document
+            { new: true }
         );
         res.json({ message: 'Activity updated successfully!', activity: updatedActivity });
     } catch (error) {
@@ -148,10 +152,9 @@ app.post('/updateActivity', ensureAuthenticated, async (req, res) => {
     }
 });
 
-// Route to delete an activity (User-specific)
 app.post('/deleteActivity', ensureAuthenticated, async (req, res) => {
     const { activityId } = req.body;
-    const username = req.session.username;  // Get the logged-in user's username
+    const username = req.session.username;
 
     try {
         await Activity.findOneAndDelete({ _id: activityId, username });
@@ -160,7 +163,6 @@ app.post('/deleteActivity', ensureAuthenticated, async (req, res) => {
         res.status(500).json({ message: 'Error deleting activity', error });
     }
 });
-
 
 // Start the server
 app.listen(PORT, () => {
