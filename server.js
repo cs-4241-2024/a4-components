@@ -111,7 +111,7 @@ app.post('/addActivity', ensureAuthenticated, async (req, res) => {
     }
 });
 
-app.get('./getActivities', ensureAuthenticated, async (req, res) => {
+app.get('/getActivities', ensureAuthenticated, async (req, res) => {
     const username = req.session.username;
 
     try {
