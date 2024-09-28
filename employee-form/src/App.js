@@ -13,7 +13,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
 
-  // Load employees from localStorage on initial render
+  // Load employees on page render
   useEffect(() => {
     const savedEmployees = JSON.parse(localStorage.getItem('employees'));
     if (savedEmployees) {
@@ -21,10 +21,10 @@ function App() {
     }
   }, []);
 
-  // Save employees to localStorage whenever the employeeList changes
+  // Saves data
   useEffect(() => {
     if (employeeList.length > 0) {
-      localStorage.setItem('employees', JSON.stringify(employeeList)); // Save to localStorage on every update
+      localStorage.setItem('employees', JSON.stringify(employeeList)); // Saves on every update
     }
   }, [employeeList]);
 

@@ -30,4 +30,4 @@ your hosting link e.g. http://a4-charlieroberts.glitch.me
 
 Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
 
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+For this assignment, I used my code from assignment 2 to make this React app. I kept the server and front-end logic the same, but used an App.js, as that is normally what I am used to doing when developing in React. For my CSS code, I left everything there mostly untouched. In general, I found that using React helped to minimize the number of files for the project, which makes it easier to "proofread" code and lowers the chance for small bugs and issues.
