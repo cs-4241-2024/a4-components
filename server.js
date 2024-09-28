@@ -1,9 +1,7 @@
-import http from 'http';
-import fs from 'fs';
-import mime from 'mime';
-
-
-import { URL } from 'url';
+const http = require('http');
+const fs = require('fs');
+const mime = require('mime');
+const { URL } = require('url');
 const dir = 'public/';
 
 
