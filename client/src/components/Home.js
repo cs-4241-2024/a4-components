@@ -21,16 +21,16 @@ function Home() {
     try {
       const response = await fetch(`${API}getActivities`);
       if (!response.ok) {
-        throw new Error('Failed to fetch activities');
+        const errorText = await response.text(); // Read the error message
+        throw new Error(`Failed to fetch activities: ${errorText}`);
       }
       const data = await response.json();
-      setActivities(data); // Update the activities array with server data
-      setShowActivityList(true); // Call the function to display the activities
+      setActivities(data);
+      setShowActivityList(true);
     } catch (error) {
       console.error('Error fetching activities:', error);
     }
   }
-
   const onSubmit = async (type, details) => {
     try {
       const activityData = {
@@ -98,13 +98,14 @@ function Home() {
         <button id="choose-work" onClick={() => setFormType('work')}>Work</button>
         <button id="choose-entertainment" onClick={() => setFormType('entertainment')}>Entertainment</button>
         <button id="choose-sleep" onClick={() => setFormType('sleep')}>Sleep</button>
-        <button id="check-list">Check My List</button>
+        <button id="check-list" onClick={() => setShowActivityList(true)}>Check My List</button>
+
       </div>
 
       {
-        formType && (
-          <div id="form-container">
-            {
+          formType && (
+              <div id="form-container">
+              {
               formType === 'work' ? <WorkForm onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
                 formType === 'entertainment' ? <Entertainment onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
                   formType === 'sleep' ? <Sleep onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
