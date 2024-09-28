@@ -45,7 +45,7 @@ const Activity = mongoose.model('Activity', activitySchema);
 passport.use(new GitHubStrategy({
         clientID: 'Ov23liWVmeftceR3mKHf',
         clientSecret: 'a44c815614194a428446ce7c2e45631130d627f6',
-        callbackURL: 'https://a4-yunynl.onrender.com/auth/github/callback'
+        callbackURL: 'https://a4-zihan-li-1.onrender.com/auth/github/callback'
 
     },
     async function (accessToken, refreshToken, profile, done) {
