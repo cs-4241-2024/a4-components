@@ -1,9 +1,12 @@
 const http = require('http');
 const fs = require('fs');
-const mime = require('mime');
 const { URL } = require('url');
 const dir = 'public/';
 
+let mime;
+import('mime').then(module => {
+  mime = module;
+});
 
 const port = 3000;
 let appdata = [];
