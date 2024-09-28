@@ -9,14 +9,18 @@ function Entertainment({ activity, editingIndex, onSubmit }) {
     }
   }, [activity])
 
-  const onFormSubmit = (e) => {
-    e.preventDefault()
-    onSubmit('entertainment', {
-      entertainmentType
-    })
-  }
+    const onFormSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await onSubmit('entertainment', { entertainmentType });
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('Failed to submit the form, please try again.');
+        }
+    };
 
-  return (
+
+    return (
     <form id="activity-form" onSubmit={onFormSubmit}>
       <h3>Entertainment Form</h3>
       <label htmlFor="entertainment-type">Type of Entertainment:</label>
