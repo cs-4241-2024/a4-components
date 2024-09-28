@@ -21,42 +21,53 @@ function Home() {
     try {
       const response = await fetch(`${API}getActivities`);
       if (!response.ok) {
-        const errorText = await response.text(); // Read the error message
+        const errorText = await response.text();
         throw new Error(`Failed to fetch activities: ${errorText}`);
       }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new TypeError('Received response is not JSON');
+      }
+
       const data = await response.json();
       setActivities(data);
       setShowActivityList(true);
     } catch (error) {
       console.error('Error fetching activities:', error);
+      alert(`Error fetching activities: ${error.message}`);
     }
   }
+
   const onSubmit = async (type, details) => {
     try {
       const activityData = {
         activityType: type,
-        details
-      }
+        details,
+      };
       const response = await fetch(editingIndex !== null ? `${API}updateActivity` : `${API}addActivity`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...activityData, activityId: activities[editingIndex]?._id }) // Send ID if editing
+        body: JSON.stringify({ ...activityData, activityId: activities[editingIndex]?._id }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to save activity');
+        const errorText = await response.text();
+        throw new Error(`Failed to save activity: ${errorText}`);
       }
 
       alert('Activity saved successfully!');
       setFormType('');
-      fetchActivities();  // Refresh the list after saving
-      setEditingIndex(null) // Reset the editing index after saving
+      await fetchActivities(); // Refresh the list after saving
+      setEditingIndex(null); // Reset the editing index after saving
     } catch (error) {
       console.error('Error saving activity:', error);
+      alert(`Error: ${error.message}`);
     }
-  }
+  };
+
 
   const onEdit = (activity) => {
     setFormType(activity.activityType)
