@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware to serve static files (CSS, JS)
-app.use(express.static(path.join(__dirname, 'public'), { index: false })); // Serve static files without auto-indexing
+app.use(express.static(path.join(__dirname, 'client/build'))); // Serve static files without auto-indexing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // For handling JSON requests
 app.use(session({ secret: 'secret-key', resave: false, saveUninitialized: true }));
@@ -69,11 +69,6 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/auth/github');
 }
 
-// Serve login page at root
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));  // Serve the login page
-});
-
 // GitHub Authentication Routes
 app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
 
@@ -93,13 +88,7 @@ app.get('/logout', (req, res, next) => {
     });
 });
 
-// Serve the index page for authenticated users
-app.use(ensureAuthenticated, express.static(path.join(__dirname, 'client/public')));
-
-// For any other route, serve the React app (index.html in the client/build folder)
-app.get('*', ensureAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/public', 'index.html'));  // Serve the React app
-});
+app.get('*', (req, res) => res.sendFile(path.resolve('client', 'build', 'index.html')));
 
 // Routes for managing activities
 app.post('/addActivity', ensureAuthenticated, async (req, res) => {
