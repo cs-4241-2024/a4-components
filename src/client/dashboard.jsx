@@ -1,6 +1,6 @@
 import "./App.css";
 import editModal, {editMatch} from "./components/editModal.jsx";
-import form, {add} from "./components/form.jsx";
+import form from "./components/form.jsx";
 import {generateMatches} from "./components/matches.jsx";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
