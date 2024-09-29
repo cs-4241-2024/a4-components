@@ -36,7 +36,7 @@ class App extends React.Component {
 	}
 
 	//Getting data for the table
-	getData() {
+	getData = (e) => {
 		if (loggedIn) {
 			fetch('/data/${username}', {
 				method: 'GET',
@@ -81,7 +81,7 @@ class App extends React.Component {
 		}
 	}
 
-	logIn() {
+	logIn = (e) => {
 		console.log("gotcalled")
 		if (!loggedIn) {
 			username = document.querySelector('#Username').value;
@@ -153,7 +153,7 @@ class App extends React.Component {
 
 
 	// load in our data from the server
-	load() {
+	load = (e) => {
 		fetch('/read', { method: 'get', 'no-cors': true })
 			.then(response => response.json())
 			.then(json => {
