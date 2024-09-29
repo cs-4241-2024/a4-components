@@ -164,25 +164,61 @@ class App extends React.Component {
 	// render component HTML using JSX 
 	//I think will call the render of each element
 	render() {
-		return (
-			<div className="App">
-				<form id="logInForm">
-					<input type="text" id="Username" placeholder="Username" />
-					<input type="text" id="Password" placeholder="Password" />
-					<button className="button" type="button" id="logInButton" onClick={this.logIn}>Log In</button>
-				</form>
-				<form id="homeworkList">
-					<input type="text" id="Code" placeholder="Class Code" />
-					<input type="text" id="Name" placeholder="Class Name" />
-					<input type="text" id="Assignment" placeholder="Assignment" />
-					<input type="text" id="Days" placeholder="Days Left" />
-					<button className="button" type="button" id="submitButton" onClick={this.submit}>Submit</button>
-					<button className="button" type="button" id="deleteButton" onClick={this.deleteRow}>Delete Last Row</button>
-				</form>
-				{this.state.todos.map((todo, i) => <Todo username={todo.username} password={todo.password} />)}
+		if (loggedIn) {
+			return (
+				<div className="App">
+					<form id="logInForm">
+						<input type="text" id="Username" placeholder="Username" />
+						<input type="text" id="Password" placeholder="Password" />
+						<button className="button" type="button" id="logInButton" onClick={this.logIn}>Log In</button>
+					</form>
+					<form id="homeworkList">
+						<input type="text" id="Code" placeholder="Class Code" />
+						<input type="text" id="Name" placeholder="Class Name" />
+						<input type="text" id="Assignment" placeholder="Assignment" />
+						<input type="text" id="Days" placeholder="Days Left" />
+						<button className="button" type="button" id="submitButton" onClick={this.submit}>Submit</button>
+						<button className="button" type="button" id="deleteButton" onClick={this.deleteRow}>Delete Last Row</button>
+					</form>
+					<table id="dataTable">
+						<thead>
+							<tr>
+								<th>Class Code</th>
+								<th>Class Name</th>
+								<th>Assignment</th>
+								<th>Days Left</th>
+								<th>Due Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							{this.state.todos.map((todo, i) => <Todo username={todo.username} password={todo.password} />)}
+						</tbody>
+					</table>
+				</div>
+			)
+		} else {
+			return (
+				<div className="App">
+					<form id="logInForm">
+						<input type="text" id="Username" placeholder="Username" />
+						<input type="text" id="Password" placeholder="Password" />
+						<button className="button" type="button" id="logInButton" onClick={this.logIn}>Log In</button>
+					</form>
+					<form id="homeworkList">
+						<input type="text" id="Code" placeholder="Class Code" />
+						<input type="text" id="Name" placeholder="Class Name" />
+						<input type="text" id="Assignment" placeholder="Assignment" />
+						<input type="text" id="Days" placeholder="Days Left" />
+						<button className="button" type="button" id="submitButton" onClick={this.submit}>Submit</button>
+						<button className="button" type="button" id="deleteButton" onClick={this.deleteRow}>Delete Last Row</button>
+					</form>
+					<table id="dataTable">
 
-			</div>
-		)
+					</table>
+				</div>
+			)
+		}
+
 	}
 }
 
