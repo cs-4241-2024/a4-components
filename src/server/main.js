@@ -9,6 +9,7 @@ const app = express()
 
 app.use(express.static('views'))
 app.use(express.static('public'))
+app.use(express.static('dist'))
 app.use(express.json())
 
 // --------------------MONGO DB------------------------
@@ -189,4 +190,6 @@ app.post( '/update', async (req,res) => {
   res.json( result )
 })
 
-ViteExpress.listen( app, 3000 )
+// ViteExpress.listen( app, 3000 )
+
+app.listen( process.env.PORT || 3000 )
