@@ -1,0 +1,98 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --main-bg-color: #242424;
+  --main-text-color: rgba(255, 255, 255, 0.87);
+  --border-color: rgba(255, 255, 255, 0.486);
+}
+
+body, html {
+  height: 100%;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+.app-container {
+  margin-top: 20px;
+  width: 100%;
+  padding: 20px;
+  background-color: #333; 
+  border-radius: 10px; 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+  margin-bottom: 20px; 
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#name, #mood, #comment {
+  width: 100%;  
+}
+
+input, select{
+  margin-right: 15px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: #444;
+  color: var(--main-text-color);
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--main-text-color);
+}
+
+button {
+  background-color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  color: var(--main-text-color);
+  outline: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.mood-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  color: var(--main-text-color);
+}
+
+.mood-table th, .mood-table td {
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  text-align: left;
+}
+
+.mood-table th {
+  background-color: #444;
+}
+
+.mood-table td button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mood-table td button:hover {
+  background-color: #cc0000;
+}
