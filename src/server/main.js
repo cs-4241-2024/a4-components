@@ -9,7 +9,7 @@ const books =[
   { 'title': 'love story', 'author': 'lisa', 'year': 2014, 'genre':'romance','ranking':2, 'authorStars':2} 
 ]
 
-
+app.use( express.static( 'dist' ) )
 app.use( express.json() )
 
 app.get( '/read', ( req, res ) => res.json( books ) )
