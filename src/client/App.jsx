@@ -119,7 +119,7 @@ class App extends React.Component {
 		}
 	}
 
-	deleteRow() {
+	deleteRow = (e) => {
 		if (loggedIn && lastRow != {}) {
 			fetch('/delete', {
 				method: 'POST',
