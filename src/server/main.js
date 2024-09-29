@@ -6,7 +6,6 @@ import cookie from 'cookie-session'
 import { MongoClient, ObjectId } from 'mongodb'
 const app = express()
 
-
 app.use(express.static('views'))
 app.use(express.static('public'))
 app.use(express.static('dist'))
