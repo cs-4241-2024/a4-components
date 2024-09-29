@@ -44,7 +44,7 @@ const Activity = mongoose.model('Activity', activitySchema);
 // GitHub OAuth Setup
 passport.use(new GitHubStrategy({
         clientID: 'Ov23liWVmeftceR3mKHf',
-        clientSecret: '83ad4d496479dfd7ffc383b3d4e17fb853dcb319',
+        clientSecret: 'a44c815614194a428446ce7c2e45631130d627f6',
         callbackURL: 'https://a4-zihan-li-1.onrender.com/auth/github/callback'
 
     },
