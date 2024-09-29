@@ -62,7 +62,7 @@ class App extends React.Component {
 	//Getting data for the table
 	getData = (e) => {
 		if (loggedIn) {
-			fetch('/data/${username}', {
+			fetch(`/data/${username}`, {
 				method: 'GET',
 				headers: { "Content-Type": "application/json" }
 			})
@@ -143,7 +143,7 @@ class App extends React.Component {
 				"Username": username,
 				"Password": password
 			};
-			fetch('/logIn', {
+			fetch(`/logIn`, {
 				method: 'POST',
 				body: JSON.stringify(newData),
 				headers: { "Content-Type": "application/json" }
@@ -155,7 +155,7 @@ class App extends React.Component {
 					console.log("Password " + json.Password);
 					if (json.Username != username || json.Password != password) {
 						//Making the call again incase during the last call a new user was made
-						fetch('/logIn', {
+						fetch(`/logIn`, {
 							method: 'POST',
 							body: JSON.stringify(newData),
 							headers: { "Content-Type": "application/json" }
