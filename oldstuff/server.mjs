@@ -1,9 +1,9 @@
-import scorerouter from "./app/routes/scoreapi.mjs";
+import scorerouter from "../vite-express-project/src/server/routes/scoreapi.mjs";
 import http from "http";
 import * as fs from "fs";
 import express from "express";
 import cors from 'cors';
-import userrouter from "./app/routes/userapi.mjs";
+import userrouter from "../vite-express-project/src/server/routes/userapi.mjs";
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -100,7 +100,7 @@ const registerAccount = async function( event ){
   }
 }
 const logindata = async function( event ){
-  const       username = document.querySelector("#username"),
+  const username = document.querySelector("#username"),
       password = document.querySelector("#password"),
       json = { username: username.value, password : password.value},
       body = JSON.stringify(json)

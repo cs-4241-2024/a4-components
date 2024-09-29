@@ -1,7 +1,5 @@
 import express from "express";
-import conn from "../database/mongodb.mjs";
 import User from "../models/User.model.js"
-import Score from "../models/Score.model.js"
 import * as bodyParser from "express";
 const userrouter = express.Router();
 userrouter.get("/", async (req, res) => {
