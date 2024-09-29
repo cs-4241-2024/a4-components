@@ -8,6 +8,7 @@ const port = 3000;
 
 // Middleware
 app.use(express.json()); // To handle JSON requests
+app.use(express.static('dist'));
 
 const appdata = [
     { name: "John Doe", foodName: "Burger", foodPrice: 10, quantity: 2 },
@@ -85,4 +86,8 @@ app.delete("/orders/:index", (req, res) => {
 });
 
 // Start the server
-ViteExpress.listen(app, port, () => console.log("Server is listening..."));
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
+// ViteExpress.listen(app, port, () => console.log("Server is listening..."));
