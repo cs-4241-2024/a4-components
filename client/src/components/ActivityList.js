@@ -1,18 +1,18 @@
 function ActivityList({ activities, onEdit, onDelete }) {
 
   return (
-    <ul id="activity-list">
-      <h2>Your Activity List</h2>
-      <table id="activity-table">
-        <thead>
-        <tr>
-          <th>Activity Type</th>
-          <th>Details</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
+      <ul id="activity-list">
+        <h2>Your Activity List</h2>
+        <table id="activity-table">
+          <thead>
+          <tr>
+            <th>Activity Type</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody>
           {
             activities.map(activity => {
               let details = '';
@@ -24,18 +24,18 @@ function ActivityList({ activities, onEdit, onDelete }) {
                 details = `Date: ${activity.details.sleepDate}, Time: ${activity.details.sleepTime}`;
               }
               return (
-                <tr key={activity._id}>
-                  <td>{activity.activityType}</td>
-                  <td>{details}</td>
-                  <td><button onClick={() => onEdit(activity)}>Edit</button></td>
-                  <td><button onClick={() => onDelete(activity)}>Delete</button></td>
-                </tr>
+                  <tr key={activity._id}>
+                    <td>{activity.activityType}</td>
+                    <td>{details}</td>
+                    <td><button onClick={() => onEdit(activity)}>Edit</button></td>
+                    <td><button onClick={() => onDelete(activity)}>Delete</button></td>
+                  </tr>
               )
             })
           }
-        </tbody>
-      </table>
-    </ul>
+          </tbody>
+        </table>
+      </ul>
   )
 }
 

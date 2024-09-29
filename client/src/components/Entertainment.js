@@ -1,37 +1,33 @@
 import { useEffect, useState } from 'react';
 
 function Entertainment({ activity, editingIndex, onSubmit }) {
-  const [entertainmentType, setEntertainmentType] = useState();
+    const [entertainmentType, setEntertainmentType] = useState();
 
-  useEffect(() => {
-    if (activity) {
-      setEntertainmentType(activity.details.entertainmentType);
-    }
-  }, [activity])
-
-    const onFormSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await onSubmit('entertainment', { entertainmentType });
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            alert('Failed to submit the form, please try again.');
+    useEffect(() => {
+        if (activity) {
+            setEntertainmentType(activity.details.entertainmentType);
         }
-    };
+    }, [activity])
 
+    const onFormSubmit = (e) => {
+        e.preventDefault()
+        onSubmit('entertainment', {
+            entertainmentType
+        })
+    }
 
     return (
-    <form id="activity-form" onSubmit={onFormSubmit}>
-      <h3>Entertainment Form</h3>
-      <label htmlFor="entertainment-type">Type of Entertainment:</label>
-      <select id="entertainment-type" name="entertainment-type" value={entertainmentType} onChange={e => setEntertainmentType(e.target.value)}>
-        <option value="video-game">Video Game</option>
-        <option value="music">Music</option>
-        <option value="fitness">Fitness</option>
-      </select>
-      <button type="submit">{editingIndex !== null ? 'Edit Entertainment' : 'Add Entertainment'}</button>
-    </form>
-  )
+        <form id="activity-form" onSubmit={onFormSubmit}>
+            <h3>Entertainment Form</h3>
+            <label htmlFor="entertainment-type">Type of Entertainment:</label>
+            <select id="entertainment-type" name="entertainment-type" value={entertainmentType} onChange={e => setEntertainmentType(e.target.value)}>
+                <option value="video-game">Video Game</option>
+                <option value="music">Music</option>
+                <option value="fitness">Fitness</option>
+            </select>
+            <button type="submit">{editingIndex !== null ? 'Edit Entertainment' : 'Add Entertainment'}</button>
+        </form>
+    )
 }
 
 export default Entertainment;

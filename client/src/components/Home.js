@@ -21,21 +21,13 @@ function Home() {
     try {
       const response = await fetch(`${API}getActivities`);
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to fetch activities: ${errorText}`);
+        throw new Error('Failed to fetch activities');
       }
-
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new TypeError('Received response is not JSON');
-      }
-
       const data = await response.json();
-      setActivities(data);
-      setShowActivityList(true);
+      setActivities(data); // Update the activities array with server data
+      setShowActivityList(true); // Call the function to display the activities
     } catch (error) {
       console.error('Error fetching activities:', error);
-      alert(`Error fetching activities: ${error.message}`);
     }
   }
 
@@ -43,31 +35,28 @@ function Home() {
     try {
       const activityData = {
         activityType: type,
-        details,
-      };
+        details
+      }
       const response = await fetch(editingIndex !== null ? `${API}updateActivity` : `${API}addActivity`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...activityData, activityId: activities[editingIndex]?._id }),
+        body: JSON.stringify({ ...activityData, activityId: activities[editingIndex]?._id }) // Send ID if editing
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to save activity: ${errorText}`);
+        throw new Error('Failed to save activity');
       }
 
       alert('Activity saved successfully!');
       setFormType('');
-      await fetchActivities(); // Refresh the list after saving
-      setEditingIndex(null); // Reset the editing index after saving
+      fetchActivities();  // Refresh the list after saving
+      setEditingIndex(null) // Reset the editing index after saving
     } catch (error) {
       console.error('Error saving activity:', error);
-      alert(`Error: ${error.message}`);
     }
-  };
-
+  }
 
   const onEdit = (activity) => {
     setFormType(activity.activityType)
@@ -101,37 +90,36 @@ function Home() {
   }
 
   return (
-    <div>
-      <h1>Activity Tracker</h1>
+      <div>
+        <h1>Activity Tracker</h1>
 
-      <div id="start-page">
-        <h2>What would you like to track?</h2>
-        <button id="choose-work" onClick={() => setFormType('work')}>Work</button>
-        <button id="choose-entertainment" onClick={() => setFormType('entertainment')}>Entertainment</button>
-        <button id="choose-sleep" onClick={() => setFormType('sleep')}>Sleep</button>
-        <button id="check-list" onClick={() => setShowActivityList(true)}>Check My List</button>
+        <div id="start-page">
+          <h2>What would you like to track?</h2>
+          <button id="choose-work" onClick={() => setFormType('work')}>Work</button>
+          <button id="choose-entertainment" onClick={() => setFormType('entertainment')}>Entertainment</button>
+          <button id="choose-sleep" onClick={() => setFormType('sleep')}>Sleep</button>
+          <button id="check-list">Check My List</button>
+        </div>
 
+        {
+            formType && (
+                <div id="form-container">
+                  {
+                    formType === 'work' ? <WorkForm onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
+                        formType === 'entertainment' ? <Entertainment onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
+                            formType === 'sleep' ? <Sleep onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
+                                null
+                  }
+                </div>
+            )
+        }
+
+        {
+            showActivityList && <ActivityList activities={activities} onEdit={onEdit} onDelete={onDelete} />
+        }
+
+        <button id="logout-button" onClick={() => window.location.href = `${API}logout`}>Logout</button>
       </div>
-
-      {
-          formType && (
-              <div id="form-container">
-              {
-              formType === 'work' ? <WorkForm onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
-                formType === 'entertainment' ? <Entertainment onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
-                  formType === 'sleep' ? <Sleep onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
-                    null
-            }
-          </div>
-        )
-      }
-
-      {
-        showActivityList && <ActivityList activities={activities} onEdit={onEdit} onDelete={onDelete} />
-      }
-
-      <button id="logout-button" onClick={() => window.location.href = `${API}logout`}>Logout</button>
-    </div>
   )
 }
 
