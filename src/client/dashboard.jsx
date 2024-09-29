@@ -3,19 +3,19 @@ import editModal, {editMatch} from "./components/editModal.jsx";
 import form from "./components/form.jsx";
 import {generateMatches} from "./components/matches.jsx";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 window.onload = async function() {
-    await generateMatches()
-    const changeButton = document.querySelector('input[name="changeButton"]');
-    changeButton.onclick = editMatch;
-
-    document.querySelector('.modal-close').addEventListener('click', () => {
-        document.getElementById('editModal').style.display = 'none';
-    });
-    document.querySelector('.cancel-modal').addEventListener('click', () => {
-        document.getElementById('editModal').style.display = 'none';
-    });
+    // await generateMatches()
+    // const changeButton = document.querySelector('input[name="changeButton"]');
+    // changeButton.onclick = editMatch;
+    //
+    // document.querySelector('.modal-close').addEventListener('click', () => {
+    //     document.getElementById('editModal').style.display = 'none';
+    // });
+    // document.querySelector('.cancel-modal').addEventListener('click', () => {
+    //     document.getElementById('editModal').style.display = 'none';
+    // });
 
 
 }
@@ -34,6 +34,18 @@ async function onLogout(event, navigate) {
 
 function Dashboard() {
     const navigate = useNavigate()
+    useEffect(() => {
+        generateMatches();
+        const changeButton = document.querySelector('input[name="changeButton"]');
+        changeButton.onclick = editMatch;
+
+        document.querySelector('.modal-close').addEventListener('click', () => {
+            document.getElementById('editModal').style.display = 'none';
+        });
+        document.querySelector('.cancel-modal').addEventListener('click', () => {
+            document.getElementById('editModal').style.display = 'none';
+        });
+    }, []);
     return (
         <>
             <h1 className="title is-family-primary is-size-1 pt-6 is-flex is-flex-direction-row">Submit your Match! <button
