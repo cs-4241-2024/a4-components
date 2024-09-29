@@ -191,7 +191,7 @@ class App extends React.Component {
 							</tr>
 						</thead>
 						<tbody>
-							{this.state.todos.map((todo, i) => <Todo username={todo.username} password={todo.password} />)}
+							{this.state.todos.map((todo, i) => <Todo classCode={todo.classCode} className={todo.className} assignment={todo.assignment} daysLeft={todo.daysLeft} dueDate={todo.dueDate} />)}
 						</tbody>
 					</table>
 				</div>
