@@ -90,36 +90,36 @@ function Home() {
   }
 
   return (
-      <div>
-        <h1>Activity Tracker</h1>
+    <div>
+      <h1>Activity Tracker</h1>
 
-        <div id="start-page">
-          <h2>What would you like to track?</h2>
-          <button id="choose-work" onClick={() => setFormType('work')}>Work</button>
-          <button id="choose-entertainment" onClick={() => setFormType('entertainment')}>Entertainment</button>
-          <button id="choose-sleep" onClick={() => setFormType('sleep')}>Sleep</button>
-          <button id="check-list">Check My List</button>
-        </div>
-
-        {
-            formType && (
-                <div id="form-container">
-                  {
-                    formType === 'work' ? <WorkForm onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
-                        formType === 'entertainment' ? <Entertainment onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
-                            formType === 'sleep' ? <Sleep onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
-                                null
-                  }
-                </div>
-            )
-        }
-
-        {
-            showActivityList && <ActivityList activities={activities} onEdit={onEdit} onDelete={onDelete} />
-        }
-
-        <button id="logout-button" onClick={() => window.location.href = `${API}logout`}>Logout</button>
+      <div id="start-page">
+        <h2>What would you like to track?</h2>
+        <button id="choose-work" onClick={() => setFormType('work')}>Work</button>
+        <button id="choose-entertainment" onClick={() => setFormType('entertainment')}>Entertainment</button>
+        <button id="choose-sleep" onClick={() => setFormType('sleep')}>Sleep</button>
+        <button id="check-list">Check My List</button>
       </div>
+
+      {
+        formType && (
+          <div id="form-container">
+            {
+              formType === 'work' ? <WorkForm onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
+                formType === 'entertainment' ? <Entertainment onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
+                  formType === 'sleep' ? <Sleep onSubmit={onSubmit} editingIndex={editingIndex} activity={editingActivity} /> :
+                    null
+            }
+          </div>
+        )
+      }
+
+      {
+        showActivityList && <ActivityList activities={activities} onEdit={onEdit} onDelete={onDelete} />
+      }
+
+      <button id="logout-button" onClick={() => window.location.href = `${API}logout`}>Logout</button>
+    </div>
   )
 }
 
