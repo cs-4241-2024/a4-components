@@ -88,8 +88,6 @@ app.get('/logout', (req, res, next) => {
     });
 });
 
-app.get('*', (req, res) => res.sendFile(path.resolve('client', 'build', 'index.html')));
-
 // Routes for managing activities
 app.post('/addActivity', ensureAuthenticated, async (req, res) => {
     const { activityType, details } = req.body;
@@ -152,6 +150,8 @@ app.post('/deleteActivity', ensureAuthenticated, async (req, res) => {
         res.status(500).json({ message: 'Error deleting activity', error });
     }
 });
+
+app.get('*', (req, res) => res.sendFile(path.resolve('client', 'build', 'index.html')));
 
 // Start the server
 app.listen(PORT, () => {
