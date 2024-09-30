@@ -1,13 +1,6 @@
-import { useState, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { Item } from "../types";
 import { getCookie } from "../utils";
-
-interface Item {
-    name: string;
-    description: string;
-    price: number;
-    quantity: number;
-    total: number;
-}
 
 function GroceryListItem({
     item,
@@ -59,28 +52,15 @@ function GroceryListItem({
     );
 }
 
-export default function GroceryList() {
-    const [data, setData] = useState<Item[] | null>(null);
-    const [updated, setUpdated] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const accessToken = getCookie("accessToken");
-
-        fetch("/data", {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${accessToken}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setData(data);
-                setUpdated(false);
-                setLoading(false);
-            });
-    }, [updated]);
-
+export default function GroceryList({
+    data,
+    loading,
+    onUpdate,
+}: {
+    data: Item[];
+    loading: boolean;
+    onUpdate: Dispatch<SetStateAction<boolean>>;
+}) {
     if (loading || !data) {
         return <div>Loading...</div>;
     }
@@ -104,7 +84,7 @@ export default function GroceryList() {
                         key={i}
                         i={i}
                         item={item}
-                        onDelete={() => setUpdated(true)}
+                        onDelete={() => onUpdate(true)}
                     />
                 ))}
             </table>

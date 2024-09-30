@@ -1,13 +1,21 @@
+import { Dispatch, SetStateAction } from "react";
 import { getCookie } from "../utils";
 
-export default function AddGroceryItem() {
-    const handleSubmit = async (e) => {
+export default function AddGroceryItem({onUpdate}: {onUpdate: Dispatch<SetStateAction<boolean>>}) {
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        const name = document.getElementById("itemName")!.value;
-        const price = document.getElementById("itemPrice")!.value;
-        const quantity = document.getElementById("itemQuantity")!.value;
-        const description = document.getElementById("itemDescription")!.value;
+        const name = (document.getElementById("itemName") as HTMLInputElement)!
+            .value;
+        const price = (document.getElementById(
+            "itemPrice"
+        ) as HTMLInputElement)!.value;
+        const quantity = (document.getElementById(
+            "itemQuantity"
+        ) as HTMLInputElement)!.value;
+        const description = (document.getElementById(
+            "itemDescription"
+        ) as HTMLInputElement)!.value;
 
         const body = JSON.stringify({
             name,
@@ -18,7 +26,7 @@ export default function AddGroceryItem() {
 
         const accessToken = getCookie("accessToken");
 
-        const response = await fetch("/data", {
+        await fetch("/data", {
             method: "POST",
             body,
             headers: {
@@ -27,7 +35,7 @@ export default function AddGroceryItem() {
             },
         });
 
-        console.log(await response.text());
+        onUpdate(true);
     };
 
     return (
@@ -61,7 +69,12 @@ export default function AddGroceryItem() {
                 id="itemDescription"
                 placeholder="item description"
             ></textarea>
-            <button type="submit" id="newItemSubmit" className="block accent round" onClick={handleSubmit}>
+            <button
+                type="submit"
+                id="newItemSubmit"
+                className="block accent round"
+                onClick={handleSubmit}
+            >
                 Add Item
             </button>
         </div>

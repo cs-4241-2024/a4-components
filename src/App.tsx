@@ -5,9 +5,33 @@ import GroceryList from "./components/GroceryList";
 
 import "./App.css";
 import { getCookie } from "./utils";
+import { useEffect, useState } from "react";
+import { Item } from "./types";
 
 function App() {
+    const [data, setData] = useState<Item[]>([]);
+    const [updated, setUpdated] = useState(false);
+    const [loading, setLoading] = useState(false);
     const loggedIn = getCookie("accessToken");
+
+    useEffect(() => {
+        setLoading(true);
+
+        const accessToken = getCookie("accessToken");
+
+        fetch("/data", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${accessToken}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+                setUpdated(false);
+                setLoading(false);
+            });
+    }, [updated]);
 
     if (!loggedIn) {
         return (
@@ -27,8 +51,12 @@ function App() {
             <h1 className="block">Your Grocery List</h1>
             <h2>Edit the table by double clicking on a section.</h2>
             <div className="main">
-                <GroceryList />
-                <AddGroceryItem />
+                <GroceryList
+                    data={data}
+                    loading={loading}
+                    onUpdate={setUpdated}
+                />
+                <AddGroceryItem onUpdate={setUpdated} />
             </div>
         </div>
     );
