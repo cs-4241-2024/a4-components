@@ -1,0 +1,5 @@
+node_modules
+.env
+extra.js
+package-lock.json
+*.zip
