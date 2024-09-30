@@ -1,15 +1,35 @@
 <!doctype html>
 <html lang="en">
+
   <head>
     <title>CS4241 Assignment 4</title>
     <meta charset="UTF-8" />
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/client/index.css">
   </head>
   <body>
     <h1>
       Shopping List
     </h1>
+    <form>
+      <input type="text" id="name" placeholder="Item name:" required />
+      <input type="number" id="price" placeholder="Price:" min="0" required />
+      <input type="number" id="quantity" placeholder="Quantity:" min="1" required />
+      <p></p>
+    </form>
+
+    <table class="tab">
+      <h2>Things to buy:</h2>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Cost</th>
+        <th>Settings</th>
+      </tr>
+      <tbody id="body"></tbody>
+    </table>
+
     <div id="root"></div>
     <script type="module" src="/src/client/main.jsx"></script>
   </body>
