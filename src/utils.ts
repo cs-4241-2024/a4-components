@@ -14,11 +14,11 @@ export function validateInput(json: {
         alert("Item name cannot be empty");
         return false;
     }
-    if (json.price == null || json.price == 0 || isNaN(json.price)) {
+    if (json.price == null || json.price <= 0 || isNaN(json.price)) {
         alert("Price must be a positive decimal number");
         return false;
     }
-    if (json.quantity == null || json.quantity == 0 || isNaN(json.quantity)) {
+    if (json.quantity == null || json.quantity <= 0 || isNaN(json.quantity)) {
         alert("Quantity must be a positive number");
         return false;
     }
