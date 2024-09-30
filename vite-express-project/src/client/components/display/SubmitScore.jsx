@@ -6,15 +6,31 @@ import BlueButton from "../default_components/BlueButton.jsx";
 
 
 function SubmitScore(props) {
+    const [points, setPoints] = useState();
+    const [date, setDate] = useState(Date.now);
+
     const SubmitScore = (e) => {
         e.preventDefault();
-        console.log("aaaaag")
+        const json = { name: props.shortname, date: date, points: points},
+            body = JSON.stringify(json)
+        fetch( '/score/add', {
+            headers: {"Content-Type": "application/json" },
+            method:'POST',
+            body: body
+        }).then(res => {
+            if (res.status === 200){
+                alert("Score added")
+            } else {
+                alert("Something went wrong")
+            }
+        })
+        props.load();
     }
     return (
         <form onSubmit={SubmitScore}>
-            <InputDateBox id="thedate" value="the date"></InputDateBox>
-            <InputNumberBox id="points" value="points"></InputNumberBox>
-            <BlueButton id="submitbutton" label={"submit"} ></BlueButton>
+            <InputDateBox id={"thedate"} hint={"the date"} onChange={(e)=> setDate(e.target.value)}></InputDateBox>
+            <InputNumberBox id={"points"} hint={"points"} onChange={(e) => setPoints(e.target.value)}></InputNumberBox>
+            <BlueButton id={"submitbutton"} label={"submit"} ></BlueButton>
         </form>
     );
 }
