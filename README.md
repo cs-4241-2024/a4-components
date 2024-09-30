@@ -24,10 +24,8 @@ Do the following to complete this assignment:
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
 
-## Your Web Application Title
+## To Do List
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+I tried to host the website on Glitch, but the latest node package is 16.14.2, which means that I cannot use concurrently. I also was not able to run two terminals at the same time, so I couldn't run both the react scripts and server.js. I am sorry, but here is the link to the code: https://glitch.com/edit/#!/a4-rose-strobel
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+The webpage is the same, except I made the todo list webpage using react. I added a root div in the original index.html, which was the todo list webpage, so that it can connect to Todo.js. I used the code from main.js in Todo.js, but implemented it so that it works with React. I also had to edit some of the paths in server.js.
