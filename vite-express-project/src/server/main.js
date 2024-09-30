@@ -7,6 +7,8 @@ import {config} from "dotenv";
 const app = express()
 
 config()
+console.log("db url " + process.env.connectionurl)
+
 app.use( express.json())
 app.use("/user", userrouter)
 app.use("/score", scorerouter)
