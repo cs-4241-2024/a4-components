@@ -1,33 +1,35 @@
-Assignment 4 - Components
-===
+# Task Tracker Application
 
-Due: September 30th, by 11:59 AM.
+**Hosted at**: [Task Tracker](https://a4-yourname.glitch.me)
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+## Overview
 
-[Svelte Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.react.md)  
+The **Assignment Tracker** allows users to create or delete tasks. The client side is reimplemented using react. 
+## Goals of the Application
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+- **User Authentication**: Users can log in using either GitHub OAuth or a sign up for an account.
+- **Task Management**: Users can create and delete their tasks, which are stored in a MongoDB database for persistence between sessions.
+- **React**: The frontend was reimplented with React components- **Security**: Data is securely handled as sessions are being maintained using Passport.js.
 
-Deliverables
----
+## Features
 
-Do the following to complete this assignment:
+1. **User Authentication**:
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
+   - Users can log in via **GitHub OAuth** or **locally**.
+   - New users can sign up, and returning users can log in and manage their tasks.
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+2. **Task Management**:
 
-## Your Web Application Title
+   - **Add Tasks**: Users can create tasks and give them a priority level (High/Low).
+    - **Delete Tasks**: Users can remove tasks by clicking the delete button.
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+3. **Persistent Data Storage**:
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
+   - The tasks are all saved in **MongoDB**, so data is stored between sessions and be accessed by any device that connects to the website.
 
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+4. **Responsive Design**:
+   - The user interface is responsive and simplistic to help users easily navigate and use the site its purpose but still designed with intent.
+
+5. **React based ui**:
+   - Front end was reimplemented using React and components such as TaskForm, TaskRow, and TaskTracker. It is also set up to use client-based routing 
+   between login, sign up, and tracker.
