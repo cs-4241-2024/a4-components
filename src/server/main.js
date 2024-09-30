@@ -22,4 +22,8 @@ app.post( '/add', ( req,res ) => {
   res.json( todos )
 })
 
+app.get('/', (req, res) => {
+  res.redirect('/index.html');
+})
+
 ViteExpress.listen( app, 3000 )
