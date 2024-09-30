@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Main App component
+// main component
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,11 +13,12 @@ class App extends React.Component {
     };
   }
 
-  // Load data from the server when the component mounts
+  //Way to load data
   componentDidMount() {
     this.load();
   }
 
+  // load in our data from the server
   load() {
     fetch('/read', { method: 'get', 'no-cors': true })
       .then(response => response.json())
@@ -26,7 +27,6 @@ class App extends React.Component {
       });
   }
 
-  // Render component HTML using JSX
   render() {
     return (
       <div className="App">
@@ -88,16 +88,16 @@ class App extends React.Component {
     );
   }
 
-  // Add a new to-do task
+
   addTask(evt) {
     evt.preventDefault();
     const { task, priority } = this.state;
 
     const newTask = {
-      task,          // Use 'task' as the task name
+      task,          
       priority,
       completed: false,
-      created_at: new Date().toISOString().split('T')[0], // Set the current date
+      created_at: new Date().toISOString().split('T')[0], //Set the current date
     };
 
     fetch('/add', {
@@ -111,20 +111,20 @@ class App extends React.Component {
       });
   }
 
-  // Delete a to-do task
+
   deleteTask(evt) {
     evt.preventDefault();
     const { deleteTask } = this.state;
   
-    fetch('/delete', { // Updated to '/delete' endpoint
+    fetch('/delete', { 
       method: 'POST',
-      body: JSON.stringify({ task: deleteTask }), // Send the task name to delete
+      body: JSON.stringify({ task: deleteTask }), 
       headers: { 'Content-Type': 'application/json' },
     })
       .then(response => response.json())
       .then(json => {
         this.setState({ 
-          todos: json, // Update the state with the updated task list from the server
+          todos: json, 
           deleteTask: ''
         });
       });

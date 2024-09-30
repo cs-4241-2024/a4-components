@@ -1,33 +1,9 @@
 Assignment 4 - Components
-===
 
-Due: September 30th, by 11:59 AM.
+## To-DO List
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+Jake Olsen: https://a4-jake-olsen.glitch.me/
 
-[Svelte Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.react.md)  
+From assignment 3 I kept most things the same. The big changes were just integrating with React and Vite-Express which was all done within the code itself and not the UI. Within the UI I made the table smaller but still overall the same functionality. When it came to integrating with React, that was rather difficult for me but after watching many tutorials and reading about React it made it much simplier to integrate what I already had into a react format. I think I just found a lot of difficulty when it came to the login screen and also the to do list screen while also using the vite-express and react back end. I did try to implement the login without react but found it more confusing to try and use two different backends. I defintly could have been taking the wrong approach, but I am stil satisfied with what I have now and will do more research when it comes to the final project.
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+I did discover and use the componentDidMount functionality within react vs useEffect purely because I thought the syntax was more straightforward and their functionality seemed similar enough to interchange the two. Again a reason that was purely for my ability to read my code a little easier. componentDidMount also seemed to be much more simple to use when dealing with simple data such as a to do list.
