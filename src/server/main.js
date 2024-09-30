@@ -200,6 +200,4 @@ app.get('/data', async (req, res) => {
   }
 });
 
-app.use( express.json() )
-
 ViteExpress.listen( app, port )
