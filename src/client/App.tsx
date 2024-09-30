@@ -1,36 +1,39 @@
-import "./App.css";
-
-import { useState } from "react";
-
-import reactLogo from "./assets/react.svg";
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import "./css/App.css";
+import {useState} from "react";
+import Login from "./Login"
+import Home from "./Home";
+import mongoose from "mongoose";
 
 function App() {
-  const [count, setCount] = useState(0);
+    const [user, setUser] = useState<string | undefined>(undefined);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  );
+
+
+    return (
+        <>
+            {user ? (
+                <Home setUser={setUser} />
+            ) : (
+                <Login user={user} setUser={setUser} />
+            )}
+        </>
+    );
+}
+
+export interface IEventTime {
+    time: string;
+    date: string;
+}
+
+export interface IEvent {
+    _id: string;
+    name: string;
+    time: IEventTime;
+    travel_hrs: string;
+    travel_mins: string;
+    depart_time: string;
+    user: string;
 }
 
 export default App;
