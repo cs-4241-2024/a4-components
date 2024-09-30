@@ -1,16 +1,53 @@
 import { Dispatch, SetStateAction } from "react";
 import { Item } from "../types";
-import { getCookie } from "../utils";
+import { getCookie, validateInput } from "../utils";
 
 function GroceryListItem({
     item,
     i,
-    onDelete,
+    onUpdate,
 }: {
     item: Item;
     i: number;
-    onDelete: () => void;
+    onUpdate: () => void;
 }) {
+    const handleEdit = async function (this: HTMLElement) {
+        const row = document.getElementById(`record-${i}`) as HTMLElement;
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const body: any = {
+            index: Number(row.id.split("-")[1]),
+        };
+
+        for (const child of row.children) {
+            const content = (child as HTMLElement).innerText;
+
+            if (Number(content)) {
+                body[child.classList[0] as keyof Item] = Number(content);
+            } else if (content !== "recordButton") {
+                body[child.classList[0] as keyof Item] = content;
+            }
+        }
+
+        console.log(body);
+
+        // Validating input
+        if (!validateInput(body)) {
+            return;
+        }
+
+        await fetch("/data", {
+            method: "PUT",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getCookie("accessToken")}`,
+            },
+        });
+
+        onUpdate();
+    };
+
     const handleDelete = async () => {
         const confirmation = confirm(
             "Are you sure you want to delete this item?"
@@ -33,17 +70,27 @@ function GroceryListItem({
             },
         });
 
-        onDelete();
+        onUpdate();
     };
 
     return (
-        <tr key={i} className="record">
-            <td className="name">{item.name}</td>
-            <td className="description">{item.description}</td>
-            <td className="price">${item.price.toFixed(2)}</td>
-            <td className="quantity">{item.quantity}</td>
-            <td className="total">${item.total.toFixed(2)}</td>
-            <td className="recordButton">
+        <tr key={i} className="record" id={`record-${i}`}>
+            <td contentEditable className="name" onBlur={handleEdit}>
+                {item.name}
+            </td>
+            <td contentEditable className="description" onBlur={handleEdit}>
+                {item.description}
+            </td>
+            <td contentEditable className="price" onBlur={handleEdit}>
+                {item.price.toFixed(2)}
+            </td>
+            <td contentEditable className="quantity" onBlur={handleEdit}>
+                {item.quantity}
+            </td>
+            <td contentEditable className="total" onBlur={handleEdit}>
+                ${item.total.toFixed(2)}
+            </td>
+            <td contentEditable className="recordButton">
                 <button className="block round" onClick={handleDelete}>
                     Delete
                 </button>
@@ -84,7 +131,7 @@ export default function GroceryList({
                         key={i}
                         i={i}
                         item={item}
-                        onDelete={() => onUpdate(true)}
+                        onUpdate={() => onUpdate(true)}
                     />
                 ))}
             </table>

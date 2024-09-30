@@ -1,7 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
-import { getCookie } from "../utils";
+import { getCookie, validateInput } from "../utils";
 
-export default function AddGroceryItem({onUpdate}: {onUpdate: Dispatch<SetStateAction<boolean>>}) {
+export default function AddGroceryItem({
+    onUpdate,
+}: {
+    onUpdate: Dispatch<SetStateAction<boolean>>;
+}) {
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
@@ -17,18 +21,23 @@ export default function AddGroceryItem({onUpdate}: {onUpdate: Dispatch<SetStateA
             "itemDescription"
         ) as HTMLInputElement)!.value;
 
-        const body = JSON.stringify({
+        const body = {
             name,
             price: parseFloat(price),
             quantity: parseInt(quantity),
             description,
-        });
+        };
+
+        // Validating input
+        if (!validateInput(body)) {
+            return;
+        }
 
         const accessToken = getCookie("accessToken");
 
         await fetch("/data", {
             method: "POST",
-            body,
+            body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${accessToken}`,
