@@ -1,5 +1,5 @@
 import "./App.css";
-import coolForm from "./coolForm";
+import CoolForm from "./coolForm";
 
 const App = () => {
   const label1 = "Worms"
@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Find Out How Cool You Are!</h1>
-      <coolForm label1={label1} label2={label2} label3={label3} label4={label4} label5={label5}/>
+      <CoolForm label1={label1} label2={label2} label3={label3} label4={label4} label5={label5}/>
     </div>
   )
 }

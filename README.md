@@ -1,17 +1,5 @@
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
 ## Opinionator
 
-http://a4-charlieroberts.glitch.me
+http://a4-sebastian-gurgol.glitch.me
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
+I added react components to the main page of Assignment 2. The page now updates somewhat as intended when users submit the things they like, all only on client-side. Figuring out React function components caused me a bit of trouble, but I can see how they could be useful for larger projects. It was also difficult working on development in VSCode and then switching to distribution on Glitch. Since this was a learning experience, I felt more hindered than helped, but now that I'm more familiar, I feel like React/Vite projects will make things much easier for me going forwards.
