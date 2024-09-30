@@ -2,7 +2,7 @@
 
 Christian Rua http://a4-christianr839.glitch.me
 
-***Recreation of A2, so there are no login or database features.***
+***Recreation of [Assignment 2](https://github.com/ChristianR839/a2-shortstack/tree/a1bbec5bb6c4b5e9885b2a0818adabc6ea43f2dc), so there are no login or database features.***
 
 This project is a simple form that allows an IT desk to keep track of laptops that are on loan. Users fill out a form indicating the ID number of the laptop and the name of the individual it's being loaned to and their information will be stored server-side and displayed in the table.
 
