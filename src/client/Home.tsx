@@ -35,7 +35,6 @@ function Event({event, update, remove}: {
     update: (id: string, event: IEvent) => void,
     remove: (id: string) => void
 }): ReactElement {
-    // const event = useRef<IEvent>(evt);
     const [editing, setEditing] = useState(event._id === "new");
     const [submitting, setSubmitting] = useState(false);
 
@@ -219,6 +218,7 @@ function Home({setUser}: {setUser: React.Dispatch<React.SetStateAction<string | 
         <>
             <Button variant="danger" className="m-3" onClick={logout}>Logout</Button>
             <Container className="align-items-center">
+                <h1 className="display-1 text-center">Events</h1>
                 <ListGroup as="div">
                     {events.map(
                         event => <Event key={event._id} event={event} update={updateEvent} remove={removeEvent}/>

@@ -15,7 +15,7 @@ function App() {
             {user ? (
                 <Home setUser={setUser} />
             ) : (
-                <Login user={user} setUser={setUser} />
+                <Login setUser={setUser} />
             )}
         </>
     );
