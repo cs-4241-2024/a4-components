@@ -1,3 +1,30 @@
+function GroceryListItem({
+    item,
+    key,
+}: {
+    item: {
+        name: string;
+        description: string;
+        price: number;
+        quantity: number;
+        total: number;
+    };
+    key: number;
+}) {
+    return (
+        <tr key={key} className="record">
+            <td className="name">{item.name}</td>
+            <td className="description">{item.description}</td>
+            <td className="price">${item.price.toFixed(2)}</td>
+            <td className="quantity">{item.quantity}</td>
+            <td className="total">${item.total.toFixed(2)}</td>
+            <td className="recordButton">
+                <button className="block round">Delete</button>
+            </td>
+        </tr>
+    );
+}
+
 export default function GroceryList() {
     const data = [
         {
@@ -38,16 +65,7 @@ export default function GroceryList() {
                     <th>Total</th>
                 </tr>
                 {data.map((item, i) => (
-                    <tr key={i} className="record">
-                        <td className="name">{item.name}</td>
-                        <td className="description">{item.description}</td>
-                        <td className="price">${item.price.toFixed(2)}</td>
-                        <td className="quantity">{item.quantity}</td>
-                        <td className="total">${item.total.toFixed(2)}</td>
-                        <td className="recordButton">
-                            <button className="block round">Delete</button>
-                        </td>
-                    </tr>
+                    <GroceryListItem key={i} item={item} />
                 ))}
             </table>
             <h3 className="grandTotal">Grand Total: ${sum.toFixed(2)}</h3>
