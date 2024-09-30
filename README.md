@@ -1,33 +1,53 @@
-Assignment 4 - Components
-===
+# To-Do List Project - Assignment #2
+https://a4-kennethsmith.glitch.me/ 
+## Overview
+This project is a customizable to-do list application that was initially created using JavaScript, CSS, and HTML. It has since been refactored and redesigned using **React** to provide a more modular and interactive interface. The application enables users to add, edit, and delete tasks while dynamically organizing them based on priority and deadlines.
 
-Due: September 30th, by 11:59 AM.
+## Features
+- **Task Addition with Priority and Date Selection**:
+  - When a new task is added, the user is prompted to assign a priority (1-5) and select a deadline using a calendar component.
+  
+- **Priority-Based Color Coding**:
+  - Tasks are color-coded based on their assigned priority:
+    - **Priority 1**: White
+    - **Priority 2**: Purple
+    - **Priority 3**: Pink
+    - **Priority 4**: Blue
+    - **Priority 5**: Red
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+- **Bold Text for Imminent Deadlines**:
+  - If a task’s due date is within a week or less, the task is displayed in **bold** text to signify urgency.
 
-[Svelte Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.react.md)  
+- **Automated Task Sorting**:
+  - Tasks are automatically sorted by priority, with higher priority tasks listed at the top.
+  - If multiple tasks share the same priority, the one with the closest deadline is positioned first.
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+- **Task Editing and Deletion**:
+  - Users can modify or remove tasks, providing complete flexibility in task management.
 
-Deliverables
----
+## Technology Used
+- **React**: For creating a dynamic and component-based UI.
+- **JavaScript, CSS, HTML**: Used in the original implementation and later integrated into the React structure.
 
-Do the following to complete this assignment:
+## Purpose
+This project demonstrates effective task management using React, combining intuitive UI elements and smart task prioritization strategies to enhance productivity and user experience.
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
+## Development Experience Summary
+Using React made development easier by allowing better organization of the code through components. It simplified handling features like task sorting and updating the UI. Managing state in React was also more straightforward compared to the original JavaScript version. The only downside was a small learning curve when switching to React.
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+## How to Run Locally
 
-## Your Web Application Title
+1. Clone the repository:
+   ```bash
+   git clone <repository_url>
+2. Navigate into the project directory
+      ```bash
+    cd todo-list-project 
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+3. Install required dependencies:
+   ```bash
+    npm install
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+4. Start the application:
+    ```bash
+    npm run dev    

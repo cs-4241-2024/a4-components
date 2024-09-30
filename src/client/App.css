@@ -1,0 +1,44 @@
+/* App Styles */
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Priority-based colors for tasks */
+.priority-1 {
+  background-color: white;
+  color: black;
+}
+
+.priority-2 {
+  background-color: purple;
+  color: white;
+}
+
+.priority-3 {
+  background-color: pink;
+  color: black;
+}
+
+.priority-4 {
+  background-color: blue;
+  color: white;
+}
+
+.priority-5 {
+  background-color: red;
+  color: white;
+}
+
+/* Bold text for tasks due in a week or less */
+.deadline-soon {
+  font-weight: bold;
+}
+
+/* Strikethrough for completed tasks */
+.completed {
+  text-decoration: line-through;
+  color: grey;
+}
