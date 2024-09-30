@@ -1,0 +1,38 @@
+{
+    "name": "vite-project",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "node --env-file=.env server.js",
+        "build": "tsc -b && vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,css,html}\"",
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "cookie-parser": "^1.4.6",
+        "express": "^4.21.0",
+        "express-session": "^1.18.0",
+        "mongodb": "^6.9.0",
+        "passport": "^0.7.0",
+        "passport-github2": "^0.1.12",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "vite-express": "^0.19.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.9.0",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react": "^4.3.1",
+        "eslint": "^9.9.0",
+        "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+        "eslint-plugin-react-refresh": "^0.4.9",
+        "globals": "^15.9.0",
+        "typescript": "^5.5.3",
+        "typescript-eslint": "^8.0.1",
+        "vite": "^5.4.1"
+    }
+}
