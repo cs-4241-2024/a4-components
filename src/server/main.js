@@ -173,55 +173,6 @@ app.post( '/edit', express.json(), async ( req, res ) => {
   }
 });
 
-
-// After login update the current user
-app.post( '/login', express.json(), async ( req, res ) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let valid_users = []
-  try {
-    await client.connect();
-    // Find current users registered collection
-    const collection = client.db("webware").collection('usersAccounts');
-
-    // Get user account info
-    valid_users = await collection.find({}).toArray();
-
-  } catch (error){
-    console.error(error)
-    res.writeHead( 500, { 'Content-Type': 'text/plain'})
-    res.end( 'error retrieving data' )
-    return
-  }
-  finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-
-  //Try and find a match in valid users
-  const user = valid_users.find(user => user.username === username)
-
-  // Check if user exists
-  if(!user){
-    res.writeHead(401, { 'Content-Type': 'text/plain'})
-    res.end('Invalid username')
-    return
-  }
-  
-  // Check if passwords match
-  if (user.password != password){
-    res.writeHead(401, { 'Content-Type': 'text/plain'})
-    res.end('Password invalid')
-    return
-  }
-
-  // Set new user
-  current_user = username
-
-  res.writeHead( 200, { 'Content-Type': 'application/json'})
-  res.end(JSON.stringify(user))
-})
-
 // Retrieve data from the database
 // Sends list of json objects for current user
 app.get('/data', async (req, res) => {
@@ -249,60 +200,6 @@ app.get('/data', async (req, res) => {
   }
 });
 
-// Add a user account to database
-app.post( '/signup', express.json(), async ( req, res ) => {
-  let username = req.body.username
-  let password = req.body.password
-
-  // create json for user account info
-  const user_signup = {}
-  user_signup.username = username
-  user_signup.password = password
-
-  try {
-    await client.connect();
-
-    // Find current users collection
-    const collection = client.db("webware").collection('usersAccounts');
-    
-    // Add data to collection
-    await collection.insertOne(user_signup)
-
-    res.writeHead( 200, { 'Content-Type': 'text/plain'})
-    res.end( 'Success inserting data' )
-
-  } catch (error){
-    console.error(error)
-    res.writeHead( 500, { 'Content-Type': 'text/plain'})
-    res.end( 'error inserting data' )
-    return
-  }
-  finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-})
-
-app.listen( process.env.PORT || port)
-
-const todos = [
-  { name:'buy groceries', completed:false }
-]
-
 app.use( express.json() )
 
-app.get( '/read', ( req, res ) => res.json( todos ) )
-
-app.post( '/add', ( req,res ) => {
-  todos.push( req.body )
-  res.json( todos )
-})
-
-app.post( '/change', function( req,res ) {
-  const idx = todos.findIndex( v => v.name === req.body.name )
-  todos[ idx ].completed = req.body.completed
-  
-  res.sendStatus( 200 )
-})
-
-ViteExpress.listen( app, 3001 )
+ViteExpress.listen( app, port )
