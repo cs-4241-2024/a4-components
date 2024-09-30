@@ -24,9 +24,11 @@ a:hover {
 }
 
 body {
+  background-color: rgb(12, 235, 216);
   margin: 0;
   display: flex;
   place-items: center;
+  flex-direction: column; /* New addition */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -34,7 +36,17 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: center; /* New addition */
+  margin-bottom: 20px; /* New addition */
+  margin: 50px 0;
+  color: #7541D9;
+  font-family: Avenir;
+  border: 2px solid #7541D9;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(117, 65, 217, 0.1);
 }
+
 
 button {
   border-radius: 8px;
@@ -45,11 +57,14 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s; /* Updated transition */
 }
+
 button:hover {
   border-color: #646cff;
+  background-color: #333; /* New addition for hover effect */
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -66,4 +81,26 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* New additions for improved styling */
+h2 {
+  color: #646cff; /* New addition for subheadings */
+  font-size: 2em; /* New addition for subheading size */
+}
+
+input[type="text"] {
+  padding: 10px; /* New addition for text input */
+  border: 2px solid #646cff; /* New addition for input border */
+  border-radius: 5px; /* New addition for rounded corners */
+  transition: border-color 0.25s; /* New addition for input focus effect */
+}
+
+input[type="text"]:focus {
+  border-color: #535bf2; /* New addition for input focus color */
+}
+
+ul {
+  list-style-type: none; /* New addition to remove bullet points */
+  padding: 0; /* New addition for padding */
 }
