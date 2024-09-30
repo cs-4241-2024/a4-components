@@ -6,11 +6,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-let moods = [{
-  name: 'Joseph',
-  mood: 'happy',
-  comment: 'yo'
-}]
+let moods = []
 
 const generateId = () => {
   if (moods.length === 0) return 1;
