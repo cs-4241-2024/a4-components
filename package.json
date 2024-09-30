@@ -8,7 +8,8 @@
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,css,html}\""
+        "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,css,html}\"",
+        "start": "node server.js"
     },
     "dependencies": {
         "cookie-parser": "^1.4.6",
