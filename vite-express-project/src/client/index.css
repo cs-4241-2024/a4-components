@@ -47,6 +47,13 @@ h1 {
   background-color: rgba(117, 65, 217, 0.1);
 }
 
+table, th, td {
+  border: 1px solid #7541D9;
+  color: #7541D9;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
 form.vertical-form {
   display: flex;
   flex-direction: column;
@@ -65,12 +72,12 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s, background-color 0.25s; /* Updated transition */
+  transition: border-color 0.25s, background-color 0.25s; 
 }
 
 button:hover {
   border-color: #646cff;
-  background-color: #333; /* New addition for hover effect */
+  background-color: #333; 
 }
 
 button:focus,
@@ -91,24 +98,24 @@ button:focus-visible {
   }
 }
 
-/* New additions for improved styling */
+
 h2 {
-  color: #646cff; /* New addition for subheadings */
-  font-size: 2em; /* New addition for subheading size */
+  color: #646cff; 
+  font-size: 2em; 
 }
 
 input[type="text"] {
-  padding: 10px; /* New addition for text input */
-  border: 2px solid #646cff; /* New addition for input border */
-  border-radius: 5px; /* New addition for rounded corners */
-  transition: border-color 0.25s; /* New addition for input focus effect */
+  padding: 10px; 
+  border: 2px solid #646cff; 
+  border-radius: 5px; 
+  transition: border-color 0.25s; 
 }
 
 input[type="text"]:focus {
-  border-color: #535bf2; /* New addition for input focus color */
+  border-color: #535bf2; 
 }
 
 ul {
-  list-style-type: none; /* New addition to remove bullet points */
-  padding: 0; /* New addition for padding */
+  list-style-type: none; 
+  padding: 0; 
 }
