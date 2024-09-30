@@ -32,11 +32,12 @@ userrouter.post("/register", async (req, res) => {
     console.log(newUser)
     try {
         const usernameExists = await User.findOne({ username });
-        if(usernameExists) {
+        const shortnameExists = await User.findOne({ shortname });
+        if(usernameExists || shortnameExists) {
             res.status(400);
-            throw new Error("Username already exists");
+            throw new Error("Username or Shortname already exists");
         } else {
-            newUser.save();
+            await newUser.save();
             res.body = req.body;
             res.status(200)
         }
