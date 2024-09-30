@@ -65,7 +65,10 @@ export default function Leaderboard(props){
                         </tr>
                         </thead>
                         <tbody id="score_tbody"> 
-                        {
+                        { 
+                            // dataArray.length > 0 ? (
+                            // console.log(dataArray[0].name)) : console.log("No data found")
+                    
                             dataArray.length > 0 ? (
                                 dataArray.map((dataPoint, i)=> { 
                                     <tr key ={i}>

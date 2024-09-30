@@ -42,8 +42,8 @@ export default function SubmitPopup(props){
     <form className="form-container">
         <input type="text" id="nameField" placeholder="Enter name" />
         <div style={{display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
-          <button type="button"  id="submit-button" className="nes-btn is-success" onClick={submit}>Submit score</button>
-          <button type="button" id="close-button" className="nes-btn is-error" onClick={props.reset}>Close</button>
+          <button type="button" id="submit-button" className="nes-btn is-success" onClick={submit}>Submit score</button>
+          <button type="button" id="close-button" className="nes-btn is-error" onClick={()=>{props.setReset(s=>s+1);props.setShowSubmit(s=>false)}}>Close</button>
         </div>
       </form>
   </Dialog>

@@ -16,12 +16,12 @@ export default function Home() {
   let [reset, setReset] = useState(0);
 
   const onGameOver = function () {
-    setShowSubmit(true);
+    setShowSubmit(s => true);
   }
 
   const resetGame = function () {
     setReset(reset + 1)
-    setShowSubmit(false);
+    setShowSubmit(s => false);
   }
 
   useEffect(()=>{
@@ -35,7 +35,7 @@ export default function Home() {
     <>
       <div style={{display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
         <div style={{display: "flex", flexDirection: "column"}}>
-          <SubmitPopup showForm={showSubmit} score={score} reset={resetGame} />
+          <SubmitPopup showForm={showSubmit} score={score} setReset={setReset} setShowSubmit={setShowSubmit}/>
           <SnakeGame score={score} setScore={setScore} onGameOver={onGameOver} reset={reset} />
         </div>
         <div style={{textAlign:"center"}}>
