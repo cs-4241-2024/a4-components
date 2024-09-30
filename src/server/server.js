@@ -55,6 +55,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../public')));
 
 passport.use(new LocalStrategy(
     async function(username, password, done) {
@@ -82,6 +83,11 @@ passport.deserializeUser(async (id, done) => {
     done(error);
   }
 });
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
