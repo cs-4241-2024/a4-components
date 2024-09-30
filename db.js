@@ -11,11 +11,15 @@ export const client = new MongoClient(uri, {
 });
 
 // Function to remove an element from an array by index
-export function removeGroceryByIndex(acccessToken, index) {
-    return client
+export async function removeGroceryByIndex(acccessToken, index) {
+    const filter = {
+        "accessToken": acccessToken,
+    };
+
+    return await client
         .db("a3")
         .collection("grocery-lists")
-        .updateOne({ acccessToken: acccessToken }, [
+        .updateOne(filter, [
             {
                 $set: {
                     ["groceries"]: {

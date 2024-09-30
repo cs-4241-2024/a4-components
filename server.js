@@ -140,9 +140,9 @@ app.delete("/data", async (req, res) => {
 
     const { index } = data;
 
-    removeGroceryByIndex(accessToken, index);
+    const result = await removeGroceryByIndex(accessToken, index);
 
-    res.send("Data deleted successfully");
+    res.send(result);
 });
 
 const startServer = async () => {

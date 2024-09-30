@@ -4,11 +4,7 @@ import AddGroceryItem from "./components/AddGroceryItem";
 import GroceryList from "./components/GroceryList";
 
 import "./App.css";
-
-function getCookie(key: string) {
-    const b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
-    return b ? b.pop() : "";
-}
+import { getCookie } from "./utils";
 
 function App() {
     const loggedIn = getCookie("accessToken");
