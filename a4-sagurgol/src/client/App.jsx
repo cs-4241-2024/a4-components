@@ -1,34 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
+import coolForm from "./coolForm";
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  const label1 = "Worms"
+  const label2 = "Tunes"
+  const label3 = "Card Games"
+  const label4 = "Rabbits"
+  const label5 = "Rice Krispies Treats"
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR!
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Find Out How Cool You Are!</h1>
+      <coolForm label1={label1} label2={label2} label3={label3} label4={label4} label5={label5}/>
     </div>
-  );
+  )
 }
 
 export default App;
