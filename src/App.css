@@ -1,42 +1,107 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+    text-align: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+th,
+td {
+    border: 1px solid white;
+    padding: 0.5rem;
 }
 
-.card {
-  padding: 2em;
+td:hover {
+    cursor: text;
 }
 
-.read-the-docs {
-  color: #888;
+button {
+    background: white;
+    border: 1px solid black;
+    color: black;
+    padding: 0.5rem;
+}
+
+input {
+    border: 1px solid white;
+    padding: 0.5rem;
+}
+
+textarea {
+    width: 25rem;
+    height: 5rem;
+    justify-self: center;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.listDiv {
+    width: 50%;
+}
+
+.formDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 50%;
+}
+
+#list {
+    margin: auto;
+}
+
+.record {
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.name {
+    width: 20rem;
+}
+
+.price {
+    width: 3rem;
+}
+
+.quantity {
+    width: 2rem;
+}
+
+.total {
+    width: 3rem;
+}
+
+.recordButton {
+    background: lightgrey;
+    border: 1px solid black;
+    color: black;
+    padding: 0.5rem;
+}
+
+.formItem {
+    display: flex;
+    flex-direction: row;
+}
+
+#itemName {
+    width: 18rem;
+}
+
+#itemPrice {
+    width: 5rem;
+}
+
+#itemQuantity {
+    width: 3rem;
 }
