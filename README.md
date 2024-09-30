@@ -1,33 +1,15 @@
-Assignment 4 - Components
-===
+## Laptop Loan Tracker
 
-Due: September 30th, by 11:59 AM.
+Christian Rua http://a4-christianr839.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+***Recreation of [Assignment 2](https://github.com/ChristianR839/a2-shortstack/tree/a1bbec5bb6c4b5e9885b2a0818adabc6ea43f2dc), so there are no login or database features.***
 
-[Svelte Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.react.md)  
+This project is a simple form that allows an IT desk to keep track of laptops that are on loan. Users fill out a form indicating the ID number of the laptop and the name of the individual it's being loaned to and their information will be stored server-side and displayed in the table.
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+There are two rules regarding laptop IDs: Only positive integers are allowed and there can be no duplicates. The application will provide a warning if either of these occur (if you insert a decimal, the floor of that value will be used).
 
-Deliverables
----
+If multiple clients are in use at the same time, the user may select the "pull from server" button to retrieve any data that is stored on the server. Additionally, the table sorts itself and has an additional column to flag any people who appear more than once in the table (this is not case-sensitive).
 
-Do the following to complete this assignment:
+I used a flexbox column for my UI positioning as well as colors from an Adobe color wheel.
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+I chose to rebuild this website using React since that is what my final project group is using and I wanted some additional practice with it. Overall, I do like React but I think that the process would have been better if the app was built from the ground-up with React in mind. Some of the solutions that I implemented initially felt clunky in the new framework. If I were to do it again, for example, I would have bound the table to the UI element rather than doing a full refresh. The only constraint here was time.
