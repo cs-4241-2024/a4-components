@@ -12,13 +12,14 @@ function App() {
     const [data, setData] = useState<Item[]>([]);
     const [updated, setUpdated] = useState(false);
     const [loading, setLoading] = useState(false);
-    const loggedIn = getCookie("accessToken");
+    const accessToken = getCookie("accessToken");
 
     useEffect(() => {
+        if (!accessToken) {
+            return;
+        }
+
         setLoading(true);
-
-        const accessToken = getCookie("accessToken");
-
         fetch("/data", {
             headers: {
                 "Content-Type": "application/json",
@@ -31,9 +32,9 @@ function App() {
                 setUpdated(false);
                 setLoading(false);
             });
-    }, [updated]);
+    }, [updated, accessToken]);
 
-    if (!loggedIn) {
+    if (!accessToken) {
         return (
             <div>
                 <h1 className="block">Your Grocery List</h1>
