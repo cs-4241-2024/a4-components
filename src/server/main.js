@@ -1,15 +1,15 @@
-import express from 'express';
-import ViteExpress from 'vite-express';
+import express from "express";
+import ViteExpress from "vite-express";
 
-const PORT = process.env.PORT || 3000;
-const app = express();
 const appdata = [];
 
-app.use( express.json() );
+const app = express();
+app.use(express.json());
+app.use(express.static('dist'));
 
-app.get( '/data', ( req,res ) => res.json( appdata ) );
+app.get("/data", (req, res) => res.json(appdata));
 
-app.post( '/submit', ( req,res ) => {
+app.post("/submit", (req, res) => {
   const newData = req.body;
 
   const game = newData.game;
@@ -30,14 +30,14 @@ app.post( '/submit', ( req,res ) => {
   });
 
   res.json(appdata);
-})
+});
 
-app.delete( '/data', function( req,res ) {
+app.delete("/data", function (req, res) {
   const index = req.body.index;
 
   appdata.splice(index, 1);
-  
-  res.json(appdata);
-})
 
-ViteExpress.listen(app, PORT);
+  res.json(appdata);
+});
+
+ViteExpress.listen(app, process.env.PORT || 3000);

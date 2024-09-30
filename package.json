@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server/main.js -w src/server",
-    "start": "cross-env NODE_ENV=production node src/server/main.js",
+    "start": "NODE_ENV=production node src/server/main.js",
     "build": "vite build"
   },
   "dependencies": {
@@ -21,5 +21,8 @@
     "@vitejs/plugin-react": "^4.2.0",
     "nodemon": "^3.0.1",
     "vite": "^5.0.2"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
