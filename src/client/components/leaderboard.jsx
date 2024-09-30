@@ -3,16 +3,19 @@ import React, { useState, useEffect } from "react";
 import "../styles/styles.css";
 
 export default function Leaderboard(props){
+    const [dataArray, setDataArray] = useState([]);
+
     const get_data = async function () {
+
         const response = await fetch("/data", {
             method: "GET",
         });
         
         const data = await response.json();
         
-        console.log(data);
-
-        return data;
+        //console.log("Data received from Server:");
+        //console.log(data);
+        setDataArray(data)
     };
 
     const delete_row = async function (event) {
@@ -33,58 +36,17 @@ export default function Leaderboard(props){
       
         const data = await response.json();
       
-        update_table(data);
+        get_data(data);
     };
 
-    const update_table = function (data) {
-        const table = document.getElementById("score_table");
-        const rows = table.rows;
-        for (var i = 0; i < rows.length; i++) {
-          table.deleteRow(0);
-        }
-        add_rows_to_table(table, data);
-    };
-
-    const add_rows_to_table = function (table, data) {
-        var tmp_tbody = document.createElement("tbody");
-        let name = document.createElement("th");
-        name.innerText = "Name";
-        let score = document.createElement("th");
-        score.innerText = "Score";
-        let rank = document.createElement("th");
-        rank.innerText = "Date";
-      
-        let header_row = tmp_tbody.insertRow();
-        header_row.appendChild(name);
-        header_row.appendChild(score);
-        header_row.appendChild(rank);
-      
-        for (var i = 0; i < data.length; i++) {
-            let row = tmp_tbody.insertRow();
-            let cell = row.insertCell();
-            row.id = "row" + toString(i);
-            cell.innerText = data[i].name;
-            cell = row.insertCell();
-            cell.innerText = data[i].score;
-            cell = row.insertCell();
-            cell.innerText = data[i].date;
-        }
-        var tbody = document.getElementById("score_tbody");
-        // console.log(tbody)
-        tbody.innerHTML = tmp_tbody.innerHTML;
-        tmp_tbody.remove();
-    };
-
-    useEffect(()=>{
-        const data = get_data();
-        update_table(data);
+   useEffect(()=>{
+        get_data();
     }, [props.reset])
 
     useEffect(()=>{
-        const data = get_data();
-        update_table(data);
+        get_data();
     }, [])
-    
+  
     return  <>
                 <h3>
                     <br />
@@ -95,7 +57,28 @@ export default function Leaderboard(props){
                     <button id="delete-button" type="button" className="nes-btn is-warning" onClick={delete_row}>Delete score</button>
                 </div>
                 <table id="score_table">
-                    <tbody id="score_tbody">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody id="score_tbody"> 
+                        {
+                            dataArray.length > 0 ? (
+                                dataArray.map((dataPoint, i)=> { 
+                                    <tr key ={i}>
+                                        <td>{dataPoint.name}</td>
+                                        <td>{dataPoint.score}</td>
+                                        <td>{dataPoint.date}</td>
+                                    </tr>
+                                })
+
+                            ) : (
+                                    <tr span="3"><td>No data available</td></tr>
+                            ) 
+                        }
                     </tbody>
                 </table>
             </>;

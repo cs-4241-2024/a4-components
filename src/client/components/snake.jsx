@@ -52,7 +52,7 @@ export default function SnakeGame(props){
         if(snakeX === foodX && snakeY === foodY) {
             updateFoodPosition();
             snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
-            props.setScore(props.score + 1); // increment score by 1
+            props.setScore(s => s + 1); // increment score by 1
         }
         // Updating the snake's head position based on the current velocity
         snakeX += velocityX;
