@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #ede0ff;
+}
+
+h1 {
+    color: rgb(158, 214, 182);
+}
+
+h2 {
+  color: rgb(255, 123, 0);
+}
+
+.App {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #B3EBF2;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #A7C7E7;
+}
