@@ -54,11 +54,29 @@ const App = () => {
 
   return (
     <div className="App">
-    <input type='text' /><button onClick={ e => add()}>add</button>
-      <ul>
-        { todos.map( (todo,i) => <Todo key={i} name={todo.name} completed={todo.completed} onclick={ toggle } /> ) }
-     </ul> 
-    </div>
+  <form className="vertical-form" onSubmit={e => { e.preventDefault(); add(); }}>
+    <label htmlFor="ToDo">Item To Do:</label>
+    <input type="text" id="ToDo" placeholder="Enter a to-do item" required />
+
+    <label htmlFor="type">Type of Work:</label>
+    <select name="type" id="type" required>
+      <option value="school">School</option>
+      <option value="work">Work</option>
+      <option value="personal">Personal</option>
+    </select>
+
+    <label htmlFor="date">Due Date:</label>
+    <input type="date" id="date" required />
+
+    <button type="submit">Add</button> {/* Set type to "submit" */}
+    
+    <ul>
+      {todos.map((todo, i) => (
+        <Todo key={i} name={todo.name} completed={todo.completed} onclick={toggle} />
+      ))}
+    </ul>
+  </form>
+</div>
   )
 }
 

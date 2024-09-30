@@ -47,6 +47,14 @@ h1 {
   background-color: rgba(117, 65, 217, 0.1);
 }
 
+form.vertical-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin: 0 auto;
+}
+
 
 button {
   border-radius: 8px;
