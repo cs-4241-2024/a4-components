@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Index.css'; // Ensure this imports your custom CSS, including Bulma
+import './App.css'; // imports my custom CSS, including Bulma
 
 const App = () => {
     const [task, setTask] = useState('');
