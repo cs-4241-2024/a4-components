@@ -14,7 +14,7 @@ export default function Leaderboard(props){
         const data = await response.json();
         
         //console.log("Data received from Server:");
-        //console.log(data);
+        console.log(data);
         setDataArray(data)
     };
 

@@ -59,10 +59,8 @@ export default function SnakeGame(props){
             updateFoodPosition();
             snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
             props.setScore(s => s + 1);
-            console.log("here");
             // props.setScore(props.score + 1); // increment score by 1
         }
-        // console.log(props.score);
         // Updating the snake's head position based on the current velocity
         snakeX += velocityX;
         snakeY += velocityY;
@@ -104,7 +102,6 @@ export default function SnakeGame(props){
         controls = document.querySelectorAll(".controls i");
     },[props.reset])
 
-    console.log(props.score)
 
     return  <div className="wrapper" >
                 <div className="game-details">
