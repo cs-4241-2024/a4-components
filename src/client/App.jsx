@@ -8,6 +8,7 @@ import SnakeGame from "./components/snake.jsx"
 import SubmitPopup from "./components/submit.jsx"
 import Leaderboard from "./components/leaderboard.jsx";
 // import RefreshRuntime from "http://localhost:5173/@react-refresh"
+import RefreshRuntime from 'react-refresh/runtime';
 
 // Home function that is reflected across the site
 export default function Home() {
