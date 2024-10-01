@@ -7,8 +7,6 @@ import "./styles/styles.css";
 import SnakeGame from "./components/snake.jsx"
 import SubmitPopup from "./components/submit.jsx"
 import Leaderboard from "./components/leaderboard.jsx";
-// import RefreshRuntime from "http://localhost:5173/@react-refresh"
-// import RefreshRuntime from 'react-refresh/runtime';
 
 // Home function that is reflected across the site
 export default function Home() {
@@ -19,22 +17,6 @@ export default function Home() {
   const onGameOver = function () {
     setShowSubmit(s => true);
   }
-
-  const resetGame = function () {
-    setReset(reset + 1)
-    setShowSubmit(s => false);
-  }
-
-  const onVercel = true;
-  
-  useEffect(()=>{
-    if(!onVercel){
-      RefreshRuntime.injectIntoGlobalHook(window)
-      window.$RefreshReg$ = () => {}
-      window.$RefreshSig$ = () => (type) => type
-      window.__vite_plugin_react_preamble_installed__ = true
-    }
-  }, [])
 
   return (
     <>

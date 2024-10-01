@@ -98,7 +98,7 @@ export default function SnakeGame(props){
         if (intervalRef?.current) {
             clearInterval(intervalRef.current);
         }
-        intervalRef.current = setInterval(gameTick, 200);
+        intervalRef.current = setInterval(gameTick, 150);
         document.addEventListener("keyup", changeDirection);
         playBoard = document.querySelector(".play-board");
         controls = document.querySelectorAll(".controls i");
