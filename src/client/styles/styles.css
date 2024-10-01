@@ -1,6 +1,7 @@
 /* @import url('../node_modules/nes.css/css/nes.min.css'); */
 /* Import Google font */
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 * {
   margin: 0;
   padding: 0;
@@ -68,7 +69,8 @@ table {
 .controls i {
   padding: 25px 0;
   text-align: center;
-  font-size: 1.3rem;
+  font-family: 'Open Sans', sans-serif;
+  /* font-size: 1.3rem; */
   color: #B8C6DC;
   width: calc(100% / 4);
   cursor: pointer;

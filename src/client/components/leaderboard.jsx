@@ -71,7 +71,7 @@ export default function Leaderboard(props){
                     
                             dataArray.length > 0 ? (
                                 dataArray.map((dataPoint, i)=> { 
-                                    <tr key ={i}>
+                                    return <tr key ={i}>
                                         <td>{dataPoint.name}</td>
                                         <td>{dataPoint.score}</td>
                                         <td>{dataPoint.date}</td>

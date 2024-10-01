@@ -1,4 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+
+import fontawesome from '@fortawesome/fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faArrowDown, faArrowUp, faArrowLeft, faArrowRight} from '@fortawesome/fontawesome-free-solid'
+
+fontawesome.library.add(faArrowDown, faArrowUp, faArrowLeft, faArrowRight);
 
 import "../styles/styles.css";
 
@@ -10,7 +16,7 @@ export default function SnakeGame(props){
     let snakeX = 5, snakeY = 5;
     let velocityX = 0, velocityY = 0;
     let snakeBody = [];
-    let setIntervalId;
+    const intervalRef = useRef(null);
     
     const updateFoodPosition = () => {
         // Passing a random 1 - 30 value as food position
@@ -20,8 +26,8 @@ export default function SnakeGame(props){
     
     const handleGameOver = () => {
         // Clearing the timer and opening the score submission form
-        clearInterval(setIntervalId);
-        props.onGameOver()
+        clearInterval(intervalRef.current);
+        props.onGameOver();
     }
     
     const changeDirection = e => {
@@ -52,8 +58,11 @@ export default function SnakeGame(props){
         if(snakeX === foodX && snakeY === foodY) {
             updateFoodPosition();
             snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
-            props.setScore(s => s + 1); // increment score by 1
+            props.setScore(s => s + 1);
+            console.log("here");
+            // props.setScore(props.score + 1); // increment score by 1
         }
+        // console.log(props.score);
         // Updating the snake's head position based on the current velocity
         snakeX += velocityX;
         snakeY += velocityY;
@@ -86,9 +95,11 @@ export default function SnakeGame(props){
         snakeBody = [];
         props.setScore(0);
         updateFoodPosition();
-        setIntervalId = setInterval(gameTick, 100);
+        if (intervalRef?.current) {
+            clearInterval(intervalRef.current);
+        }
+        intervalRef.current = setInterval(gameTick, 200);
         document.addEventListener("keyup", changeDirection);
-
         playBoard = document.querySelector(".play-board");
         controls = document.querySelectorAll(".controls i");
     },[props.reset])
@@ -101,10 +112,18 @@ export default function SnakeGame(props){
                 </div>
                 <div className="play-board"></div>
                 <div className="controls">
-                    <i data-key="ArrowLeft" className="fa-solid fa-arrow-left-long"></i>
-                    <i data-key="ArrowUp" className="fa-solid fa-arrow-up-long"></i>
-                    <i data-key="ArrowRight" className="fa-solid fa-arrow-right-long"></i>
-                    <i data-key="ArrowDown" className="fa-solid fa-arrow-down-long"></i>
+                    <i data-key="ArrowLeft">
+                        <FontAwesomeIcon icon={faArrowLeft} size="5x" inverse />
+                    </i>
+                    <i data-key="ArrowUp">
+                        <FontAwesomeIcon icon={faArrowUp} size="5x" inverse />
+                    </i>
+                    <i data-key="ArrowRight">
+                        <FontAwesomeIcon icon={faArrowRight} size="5x" inverse />
+                    </i>
+                    <i data-key="ArrowDown">
+                        <FontAwesomeIcon icon={faArrowDown} size="5x" inverse />
+                    </i>
                 </div>
             </div>
 }

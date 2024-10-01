@@ -34,16 +34,21 @@ export default function SubmitPopup(props){
       
       const data = await response.json();
       console.log(data);
-      props.reset();
+      reset()
     };
   
+  const reset = function(){
+    props.setReset(s=>s+1);
+    props.setShowSubmit(s=>false);
+  }
+
   return <Dialog open={props.showForm}>
     <DialogTitle>Game Over</DialogTitle>
     <form className="form-container">
         <input type="text" id="nameField" placeholder="Enter name" />
         <div style={{display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
           <button type="button" id="submit-button" className="nes-btn is-success" onClick={submit}>Submit score</button>
-          <button type="button" id="close-button" className="nes-btn is-error" onClick={()=>{props.setReset(s=>s+1);props.setShowSubmit(s=>false)}}>Close</button>
+          <button type="button" id="close-button" className="nes-btn is-error" onClick={reset}>Close</button>
         </div>
       </form>
   </Dialog>
