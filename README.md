@@ -21,7 +21,7 @@ Do the following to complete this assignment:
 5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
 6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
+Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions) ahaha
 ---
 
 ## Your Web Application Title
