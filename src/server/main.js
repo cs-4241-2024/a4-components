@@ -11,6 +11,12 @@ let appdata = [
   ['Webware HW','4','1'], 
 ];
 
+app.use( express.static( 'dist' ) )
+
+app.get('/', (request, response) => {
+  response.redirect('index.html');
+})
+
 app.get('/api/table', (req, res) => {
   res.json({'table': appdata});
 });
@@ -45,6 +51,4 @@ const sendFile = function(res, filename) {
   });
 };
 
-ViteExpress.listen(app, port, () =>
-  console.log(`Server is listening on port ${port}...`),
-);
+app.listen( process.env.PORT || 3000)
