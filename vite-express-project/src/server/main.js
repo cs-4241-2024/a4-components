@@ -1,6 +1,8 @@
 import express from 'express';
 import ViteExpress from 'vite-express';
 
+
+
 // Your product data will be stored here
 let products = [
   { product: "iPhone", releaseYear: 2007, releaseCost: 499, currentCost: 605 },
@@ -24,6 +26,8 @@ function calculateCurrentCost(product) {
 const app = express();
 app.use(express.json()); // Enable JSON parsing
 
+app.use(express.static('dist'))
+
 // Endpoint to get the list of products
 app.get('/products', (req, res) => {
   res.json(products);
@@ -44,7 +48,9 @@ app.post('/products/delete', (req, res) => {
   res.json(products); // Send the updated list back to the client
 });
 
-// Start the Vite-Express server
-ViteExpress.listen(app, 3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
+app.listen(3000)
+
+// // Start the Vite-Express server
+// ViteExpress.listen(app, 3000, () => {
+//   console.log('Server is running on http://localhost:3000');
+// });
