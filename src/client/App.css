@@ -1,7 +1,7 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
 html, body {
-  height: 100%;
+  height: auto;
   min-height: 100vh;
   margin: 0;
 }
@@ -9,11 +9,11 @@ html, body {
 body {
   background: linear-gradient(to right, #95D3D0, #C2D6BE, #D2AC8A);
   font-family: 'Montserrat', Italic, serif;
+  padding: 20px 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  padding: 0 10px;
+  align-items: center;
+  justify-content: flex-start;
   min-height: 100vh;
 }
 
@@ -21,11 +21,12 @@ body {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
+  padding-top: 20px;
 }
 
 .form-box {
-  width: 60%;
-  max-width: 450px;  /* Limit width for better responsiveness */
+  width: 100%;
+  max-width: 500px;  /* Limit width for better responsiveness */
   margin: 0 auto;
 }
 
