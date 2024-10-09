@@ -16,29 +16,35 @@ const App = () => {
   const [etime, setEtime] = useState('');
   
   function edit(i){
-    const nwo = document.querySelector( 'input[name="nwout"]:checked' ),
-      ndat = document.querySelector( "#ndate"),
-      nst = document.querySelector( "#nstime"),
-      net = document.querySelector( "#netime")
-    
-    const [nshr, nsmin] = nst.value.split(":"),
-      [nehr, nemin] = net.value.split(":"),
+    //e.preventDefault()
+
+   // const nwo = workout, //document.querySelector( 'input[name="nwout"]:checked' ),
+   //   ndat = date, //document.querySelector( "#ndate" + i),
+   //   nst = stime,//document.querySelector( "#nstime" + i),
+   //   net = etime//document.querySelector( "#netime" + i)
+    console.log(workout, date, stime, etime)
+    const [nshr, nsmin] = stime.split(":"),
+      [nehr, nemin] = etime.split(":"),
       nhr = nehr - nshr,
       nmin = nemin - nsmin,
       nt = nhr * 60 + nmin;
 
     const newLog = [...logs];
-  ``
+ 
+    newLog[i] = {index: i, workout: workout, date: date, stime: stime, etime: etime, time: nt};
+  
+    //setLogs(newLog)
 
-    newLog[i] = {... newLog[i].index, nwo, ndat, nst, net, time: nt};
+    //console.log(logs)
+ 
+    //setLogs(newLog);
 
-    setLogs(newLog);
+    //console.log(newLog, logs)
 
-    console.log(newLog)
+   // console.log(logs)
 
-    console.log(logs)
-
-    const body = JSON.stringify(logs[i]);
+    // body = JSON.stringify(logs[i]);
+    const body = JSON.stringify({index: i, workout: workout, date: date, stime: stime, etime: etime, time: nt});
 
     fetch( '/save', {
       method: "PUT",
@@ -62,6 +68,13 @@ const App = () => {
     .then( json => {
        setLogs( json )
     })
+  }
+
+  function updateValues(log){
+    setDate(log.date)
+    setEtime(log.etime)
+    setStime(log.stime)
+    setWorkout(log.workout)
   }
 
   function add(e) {
@@ -155,11 +168,12 @@ const App = () => {
                         <option value="Cardio" name="nwout">Cardio</option>
                       </select>
                     </td>
-                    <td><input type="date" id="ndate" value={log.date} onChange={(e) => setDate(e.target.value)} ></input></td>
-                    <td><input type="time" id="nstime" value={log.stime} onChange={(e) => setStime(e.target.value)}></input></td>
-                    <td><input type="time" id="netime" value={log.etime} onChange={(e) => setEtime(e.target.value)}></input></td>
+                    <td><input type="date" id={"ndate" + i} value={log.date} onChange={(e) => setDate(e.target.value)} ></input></td>
+                    <td><input type="time" id={"nstime" + i} value={log.stime} onChange={(e) => setStime(e.target.value)}></input></td>
+                    <td><input type="time" id={"netime" + i} value={log.etime} onChange={(e) => setEtime(e.target.value)}></input></td>
                     <td>{log.time}</td>
                     <td><button onClick={() => edit(i)}>Save</button></td>
+                    <td><button onClick={() => updateValues(log)}>Edit</button></td>
                     <td><button onClick={() => del(i)}>Delete</button></td>
                   </tr>
                 ))}
