@@ -23,20 +23,30 @@ app.put( '/save', function( req, res ) {
 
   const entry = req.body;
 
-  console.log(entry);
+  const prevEntry = appdata.find(data => data.index === entry.index);
 
-  appdata.forEach(data => {
-    if(data.index === entry.index){
-      appdata[entry.index] = {
-        index: entry.index,
-        workout: entry.workout,
-        date: entry.date,
-        stime: entry.stime,
-        etime: entry.etime,
-        time: entry.time
-      }
-    }
-  })
+  if(prevEntry){
+    prevEntry.workout = entry.workout;
+    prevEntry.date = entry.date;
+    prevEntry.stime = entry.stime;
+    prevEntry.etime = entry.etime;
+    prevEntry.time = entry.time;
+  }
+
+  // console.log(entry);
+
+  // appdata.forEach(data => {
+  //   if(data.index === entry.index){
+  //     appdata[entry.index] = {
+  //       index: entry.index,
+  //       workout: entry.workout,
+  //       date: entry.date,
+  //       stime: entry.stime,
+  //       etime: entry.etime,
+  //       time: entry.time
+  //     }
+  //   }
+  // })
   // appdata[ind] = req.body;
   res.json(appdata);
   

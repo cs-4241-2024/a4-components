@@ -14,48 +14,49 @@ const App = () => {
   const [date, setDate] = useState('');
   const [stime, setStime] = useState('');
   const [etime, setEtime] = useState('');
+  // const [time, setTime] = useState('');
   
-  function edit(i){
+  function save(i){
     //e.preventDefault()
 
    // const nwo = workout, //document.querySelector( 'input[name="nwout"]:checked' ),
    //   ndat = date, //document.querySelector( "#ndate" + i),
    //   nst = stime,//document.querySelector( "#nstime" + i),
    //   net = etime//document.querySelector( "#netime" + i)
-    console.log(workout, date, stime, etime)
-    const [nshr, nsmin] = stime.split(":"),
-      [nehr, nemin] = etime.split(":"),
+    const [nshr, nsmin] = logs[i].stime.split(":"),
+      [nehr, nemin] = logs[i].etime.split(":"),
       nhr = nehr - nshr,
       nmin = nemin - nsmin,
       nt = nhr * 60 + nmin;
 
-    const newLog = [...logs];
- 
-    newLog[i] = {index: i, workout: workout, date: date, stime: stime, etime: etime, time: nt};
-  
-    //setLogs(newLog)
+    updateLogs(i, {...logs[i], time: nt})
+    
+    console.log(logs[i].time)
+    console.log(nt);
+    console.log(logs[i]);
 
-    //console.log(logs)
- 
-    //setLogs(newLog);
-
-    //console.log(newLog, logs)
-
-   // console.log(logs)
-
-    // body = JSON.stringify(logs[i]);
-    const body = JSON.stringify({index: i, workout: workout, date: date, stime: stime, etime: etime, time: nt});
 
     fetch( '/save', {
       method: "PUT",
       headers: { 'Content-Type': 'application/json' },
-      body: body
+      body: JSON.stringify(logs[i])
     })
     .then( response => response.json() )
     .then( json => {
-       setLogs( json )
-    })
+       setLogs( (prevLogs) => {
+        const updatedLogs = [...prevLogs];
+        updatedLogs[i] = json[i];
+        return updatedLogs;
+       } );
+    });
   }
+
+  const updateLogs = (idx, newValue) => {
+    setLogs(prevLogs => {
+      prevLogs[idx] = newValue;
+      return prevLogs;
+    });
+  };
 
   function del(i){
     const body = JSON.stringify(logs[i]);
@@ -153,6 +154,7 @@ const App = () => {
                   <th>End Time</th>
                   <th>Time (mins)</th>
                   <th>Edit</th>
+                  <th>Save</th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -160,7 +162,7 @@ const App = () => {
                 {logs.map((log, i) => (
                   <tr key={i}>
                     <td>
-                      <select value={log.workout} onChange={(e) => setWorkout(e.target.value)}>
+                      <select value={log.workout} onChange={(e) => {updateLogs(i, {...log, workout: e.target.value}); setWorkout(e.target.value)}}>
                         <option value="Full Body" name="nwout">Full Body</option>
                         <option value="Upper Body" name="nwout">Upper Body</option>
                         <option value="Lower Body" name="nwout">Lower Body</option>
@@ -168,12 +170,12 @@ const App = () => {
                         <option value="Cardio" name="nwout">Cardio</option>
                       </select>
                     </td>
-                    <td><input type="date" id={"ndate" + i} value={log.date} onChange={(e) => setDate(e.target.value)} ></input></td>
-                    <td><input type="time" id={"nstime" + i} value={log.stime} onChange={(e) => setStime(e.target.value)}></input></td>
-                    <td><input type="time" id={"netime" + i} value={log.etime} onChange={(e) => setEtime(e.target.value)}></input></td>
+                    <td><input type="date" id={"ndate" + i} value={log.date} onChange={(e) => {updateLogs(i, {...log, date: e.target.value}); setDate(e.target.value)}} ></input></td>
+                    <td><input type="time" id={"nstime" + i} value={log.stime} onChange={(e) => {updateLogs(i, {...log, stime: e.target.value}); setStime(e.target.value)}}></input></td>
+                    <td><input type="time" id={"netime" + i} value={log.etime} onChange={(e) => {updateLogs(i, {...log, etime: e.target.value}); setEtime(e.target.value)}}></input></td>
                     <td>{log.time}</td>
-                    <td><button onClick={() => edit(i)}>Save</button></td>
-                    <td><button onClick={() => updateValues(log)}>Edit</button></td>
+                    {/* <td><button onClick={() => updateValues(log)}>Edit</button></td> */}
+                    <td><button onClick={() => save(i)}>Save</button></td>
                     <td><button onClick={() => del(i)}>Delete</button></td>
                   </tr>
                 ))}
