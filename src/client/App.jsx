@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react' // anything with 'useX' in it is called a "hook"
+import {Table} from './Components.jsx'
+import {Input} from './Components.jsx'
 
 const Todo = props => (
-  <table>
-    <tbody>
-      {props.name}
-      {props.price}
-      {props.quantity}
-      {props.tcost}
-      <input type="checkbox" defaultChecked={props.completed} onChange={ e => props.onclick( props.name, e.target.checked ) }/>
+  <tbody>
+    {props.name}
+    {props.price}
+    {props.quantity}
+    {props.tcost}
+    <input type="checkbox" defaultChecked={props.completed} onChange={ e => props.onclick( props.name, e.target.checked ) }/>
 
-    </tbody>
-  </table>
+  </tbody>
+
 )
 
 const App = () => {
@@ -26,11 +27,13 @@ const App = () => {
 
   function add() {
     const value = document.querySelector('input').value
+    const price = document.querySelector('price').value
+    const quant = document.querySelector('quantity').value
     const totcost = price * quantity
 
     fetch( '/add', {
       method:'POST',
-      body: JSON.stringify({ name:value, price:value, quantity:value, tcost:totcost, completed:false }),
+      body: JSON.stringify({ name:value, price:price, quantity:quant, tcost:totcost, completed:false }),
       headers: { 'Content-Type': 'application/json' }
     })
     .then( response => response.json() )
@@ -62,21 +65,12 @@ const App = () => {
       <h2>Things to buy:</h2>
       
       <table class="tab">  
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total Cost</th>
-            <th>Checked</th>
-            <th>Settings</th>
-          </tr>
-        </thead>
-
-        <tbody id="body">
-          { todos.map( (todo,i) => <Todo key={i} name={todo.name} price={todo.price} quantity={todo.quantity} tcost={todo.tcost} completed={todo.completed} onclick={ toggle } /> ) }
-        </tbody> 
-
+        <Table />
+        <td>
+          <tbody id="body">
+            { todos.map( (todo,i) => <Todo key={i} name={todo.name} price={todo.price} quantity={todo.quantity} tcost={todo.tcost} completed={todo.completed} onclick={ toggle } /> ) }
+          </tbody>
+        </td>
       </table>
 
       <tr id="rows"> 
