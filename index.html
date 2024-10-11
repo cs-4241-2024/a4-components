@@ -11,6 +11,7 @@
     <h1>
       Shopping List
     </h1>
+    <td></td> <th></th> <tr></tr> <tbody></tbody>
     <form>
       <input type="text" id="name" placeholder="Item name:" required />
       <input type="number" id="price" placeholder="Price:" min="0" required />
@@ -21,5 +22,21 @@
     </form>
    
     <script type="module" src="/src/client/main.jsx"></script>
+
+    <div id="editor" style="display: none">
+      <h2>Edit Entry</h2>
+      <form id="editForm">
+        <label for="editItem">Item:</label>
+        <input type="text" id="editItem" name="name" required /><br />
+        <label for="editPrice">Price:</label>
+        <input type="number" id="editPrice" name="price" min="0" required /><br />
+        <label for="editQuantity">Quantity:</label>
+        <input type="number" id="editQuantity" name="quantity" min="1" required /><br />
+        <input type="hidden" id="editId" />
+        <button type="submit">save</button>
+        <button type="button" onclick="stopEdit()">cancel</button>
+      </form>
+    </div>
+
   </body>
 </html>
