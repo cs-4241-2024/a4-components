@@ -1,7 +1,5 @@
 ## Workout Tracker
 
-https://a3-samnaik10.glitch.me
-
 Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
 
 - The goal of the application is to log your workouts. 
