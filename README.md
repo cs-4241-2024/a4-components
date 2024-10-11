@@ -1,13 +1,8 @@
 ## Workout Tracker
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
 
-- The goal of the application is to log your workouts. 
-- I had some problems implementing OAuth authentication with passport.js saving the users and navigating to the website after login. 
-- I chose the Github2 strategy via passport.js because it was suggested to use Github authentication. 
-- I used tailwind css for the framework because I like the way it fits in with JS and HTML.
-  - session - storing session data.
-  - passport - OAuth Github2 for authentication
 
-## Technical Achievements
-- **Tech Achievement 1**: I used OAuth authentication via the GitHub strategy via passport.js
+Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
+
+This project allows you to enter logs for your workouts by filling out a form. You can select what body part you worked on, the date, start time and end time. Based on the start and end time, it calculates the total minutes spend working out.
+I re-implemented my A2 assignment using react, vite and express. The new technology was tough to implement and hindered the development experience. If I had more experience with it, I thinnk it would improve the experience. 
