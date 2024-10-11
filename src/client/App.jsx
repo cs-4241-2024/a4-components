@@ -1,28 +1,11 @@
-
 import React, { useState, useEffect } from 'react'
-
-// const Log = props => (
-//   <li>{props.workout} : 
-//     <input type="checkbox" defaultChecked={props.workout} onChange={ e => props.onclick( props.name, e.target.checked ) }/>
-//   </li>
-// )
+import './App.css';
 
 const App = () => {
   const [logs, setLogs] = useState([]);
   const [ind, setInd] = useState(0);
-  const [workout, setWorkout] = useState('');
-  const [date, setDate] = useState('');
-  const [stime, setStime] = useState('');
-  const [etime, setEtime] = useState('');
-  // const [time, setTime] = useState('');
   
   function save(i){
-    //e.preventDefault()
-
-   // const nwo = workout, //document.querySelector( 'input[name="nwout"]:checked' ),
-   //   ndat = date, //document.querySelector( "#ndate" + i),
-   //   nst = stime,//document.querySelector( "#nstime" + i),
-   //   net = etime//document.querySelector( "#netime" + i)
     const [nshr, nsmin] = logs[i].stime.split(":"),
       [nehr, nemin] = logs[i].etime.split(":"),
       nhr = nehr - nshr,
@@ -30,32 +13,17 @@ const App = () => {
       nt = nhr * 60 + nmin;
 
     updateLogs(i, {...logs[i], time: nt})
-    
-    console.log(logs[i].time)
-    console.log(nt);
-    console.log(logs[i]);
-
-
     fetch( '/save', {
       method: "PUT",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(logs[i])
+      body: JSON.stringify(logs)
     })
     .then( response => response.json() )
-    .then( json => {
-       setLogs( (prevLogs) => {
-        const updatedLogs = [...prevLogs];
-        updatedLogs[i] = json[i];
-        return updatedLogs;
-       } );
-    });
+    .then( json => {});
   }
 
   const updateLogs = (idx, newValue) => {
-    setLogs(prevLogs => {
-      prevLogs[idx] = newValue;
-      return prevLogs;
-    });
+    setLogs(logs.map((log, i) => i === idx ? newValue : log));
   };
 
   function del(i){
@@ -69,13 +37,6 @@ const App = () => {
     .then( json => {
        setLogs( json )
     })
-  }
-
-  function updateValues(log){
-    setDate(log.date)
-    setEtime(log.etime)
-    setStime(log.stime)
-    setWorkout(log.workout)
   }
 
   function add(e) {
@@ -153,7 +114,6 @@ const App = () => {
                   <th>Start Time</th>
                   <th>End Time</th>
                   <th>Time (mins)</th>
-                  <th>Edit</th>
                   <th>Save</th>
                   <th>Delete</th>
                 </tr>
@@ -174,7 +134,6 @@ const App = () => {
                     <td><input type="time" id={"nstime" + i} value={log.stime} onChange={(e) => {updateLogs(i, {...log, stime: e.target.value}); setStime(e.target.value)}}></input></td>
                     <td><input type="time" id={"netime" + i} value={log.etime} onChange={(e) => {updateLogs(i, {...log, etime: e.target.value}); setEtime(e.target.value)}}></input></td>
                     <td>{log.time}</td>
-                    {/* <td><button onClick={() => updateValues(log)}>Edit</button></td> */}
                     <td><button onClick={() => save(i)}>Save</button></td>
                     <td><button onClick={() => del(i)}>Delete</button></td>
                   </tr>
@@ -184,12 +143,6 @@ const App = () => {
           </div>
 
         </div>
-{/* 
-      <input type='text' /><button onClick={ e => add()}>add</button>
-        <ul>
-          { todos.map( (todo,i) => <Todo key={i} name={todo.name} completed={todo.completed} onclick={ toggle } /> ) }
-        </ul>  */}
-
     </div>
   )
 }
