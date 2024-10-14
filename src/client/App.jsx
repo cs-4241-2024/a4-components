@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react' // anything with 'useX' in it
 import {Table} from './Components.jsx'
 import {Input} from './Components.jsx'
 
-function editRow(entry) {
+function stopEdit() { // closes editing tab
+  document.querySelector("#editor").style.display = "none";
+}
+
+function editRow(entry, setTodos) {
   document.querySelector("#editItem").value = entry.name;
   document.querySelector("#editPrice").value = entry.price;
   document.querySelector("#editQuantity").value = entry.quantity;
@@ -17,10 +21,11 @@ function editRow(entry) {
       name: document.querySelector("#editItem").value,
       price: document.querySelector("#editPrice").value,
       quantity: document.querySelector("#editQuantity").value,
+      id: entry.id
     };
 
     try {
-      const response = await fetch(`/editor/${id}`, {
+      const response = await fetch(`/change/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(updatedEntry),
@@ -28,7 +33,7 @@ function editRow(entry) {
       if (response.ok) {
         const data = await response.json();
         console.log("Updated data:", data);
-        displayRows(data);
+        setTodos(data);
         stopEdit();
       } else {
         console.error("Failed to update entry.");
@@ -39,17 +44,14 @@ function editRow(entry) {
   };
 }
 
-function stopEdit() { // closes editing tab
-  document.querySelector("#editor").style.display = "none";
-}
-
-const deleteRow = async function(id) {
+const deleteRow = async function(id, setTodos) {
+  //let id = entry.id;
   try {
     const response = await fetch(`/delete/${id}`, {method: "DELETE"});
     if (response.ok) { // successfully deleted
       const data = await response.json();
       console.log("Received data:", data);
-      displayRows(data); // display the new data
+      setTodos(data); // display the new data
     } else {
       console.error("Failed to delete entry.");
     }
@@ -60,8 +62,8 @@ const deleteRow = async function(id) {
 
 
 const Todo = props => (
+
   <tr> 
-    
     <td>{props.name}</td>
     <td>{props.price}</td>
     <td>{props.quantity}</td>
@@ -69,20 +71,9 @@ const Todo = props => (
     <td><input type="checkbox" defaultChecked={props.completed} onChange={ e => props.onclick( props.name, props.price, props.quantity, props.tcost, e.target.checked ) }/></td>
     
     <td>
-      <button onClick={() => editRow(props)}>Edit</button>
-      <button onClick={() => deleteRow(props)}>Delete</button>
+      <button onClick={(e) => {e.preventDefault(); editRow(props, props.setTodos)}}>Edit</button>
+      <button onClick={(e) => {e.preventDefault(); deleteRow(props.id, props.setTodos)}}>Delete</button>
     </td>
-    {/* const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    editButton.onclick = () => editRow(entry);
-    tr.appendChild(editButton);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.onclick = () => deleteRow(entry.id);
-    tr.appendChild(deleteButton); */}
-
-
   </tr>
 
 )
@@ -90,60 +81,98 @@ const Todo = props => (
 const App = () => {
   const [todos, setTodos] = useState([ ]) 
 
-  function toggle( name, price, quantity, tcost, completed ) {
-    fetch( '/change', {
-      method:'POST',
-      body: JSON.stringify({ name, price, quantity, tcost, completed }),
-      headers: { 'Content-Type': 'application/json' }
-    })
+  async function toggle(todo) {
+    todo.completed = !todo.completed;
+
+    const response = await fetch(`/change/${todo.id}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(todo),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Updated data:", data);
+      setTodos(data);
+    }
   }
 
   function add() {
-    console.log("------------------------------------")
+    //console.log("------------------------------------")
     const value = document.querySelector('#name').value
     const price = document.querySelector('#price').value
     const quant = document.querySelector('#quantity').value
     const totcost = price * quant
-    debugger
-    fetch( '/add', {
-      method:'POST',
-      body: JSON.stringify({ name:value, price:price, quantity:quant, tcost:totcost, completed:false }),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then( response => response.json() )
-    .then( json => {
-       setTodos( json )
-    })
+
+    if (!(value && price && quant)) {
+      console.log("Nothing was submitted.");
+    }
+    else {
+      fetch( '/add', {
+        method:'POST',
+        body: JSON.stringify({ name:value, price:price, quantity:quant, tcost:totcost, completed:false }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then( response => response.json() )
+      .then( json => {
+        setTodos( json )
+      })
+    }
   }
   
   // make sure to only do this once
-  if( todos.length === 0 ) {
-    fetch( '/read' )
-      .then( response => response.json() )
-      .then( json => {
-        setTodos( json ) 
+  if(todos.length === 0) {
+    fetch('/read')
+      .then(response => response.json())
+      .then(json => {
+        setTodos(json) 
       })
   }
-  
-  // render() {
-  //   let heading = ["Item", "Price", "Quantity", "Total Cost", "Completed", "Settings"];
-  // }
 
   useEffect( ()=> {
     document.title = `${todos.length} todo(s)`
   })
 
   return (
-    <div className="App" id="root">
-      <button onClick={ e => add()}>add</button>
-      <h2>Things to buy:</h2>
+    <div>
+      <h1>
+        Shopping List
+      </h1>
+
+      <form>
+        <input type="text" id="name" placeholder="Item name:" required />
+        <input type="number" id="price" placeholder="Price:" min="0" required />
+        <input type="number" id="quantity" placeholder="Quantity:" min="1" required />
+        <br/> <br/>
+        <button onClick={ e => add()}>add</button>
+
+      </form>
       
-      <table className="tab">  
-        <Table />
-          <tbody id="body">
-            { todos.map( (todo,i) => <Todo key={i} name={todo.name} price={todo.price} quantity={todo.quantity} tcost={todo.tcost} completed={todo.completed} id={todo.id} onclick={ toggle } /> ) }
-          </tbody>
-      </table>
+      <div className="App">
+        <h2>Things to buy:</h2>
+        
+        <table className="tab">  
+          <Table />
+            <tbody id="body">
+              { todos.map( (todo,i) => <Todo key={i} name={todo.name} price={todo.price} quantity={todo.quantity} tcost={todo.tcost} completed={todo.completed} id={todo.id} onclick={() => toggle(todo)} setTodos={setTodos} /> ) }
+            </tbody>
+        </table>
+      </div>
+
+      <div id="editor" style={{display: "none"}}>
+        <h2>Edit Entry</h2>
+        <form id="editForm">
+          <label htmlFor="editItem">Item:</label>
+          <input type="text" id="editItem" name="name" required /><br />
+          <label htmlFor="editPrice">Price:</label>
+          <input type="number" id="editPrice" name="price" min="0" step="any" required /><br />
+          <label htmlFor="editQuantity">Quantity:</label>
+          <input type="number" id="editQuantity" name="quantity" min="1" required /><br />
+          <input type="hidden" id="editId" />
+          <button type="submit">save</button>
+          <button type="button" onClick={stopEdit}>cancel</button>
+        </form>
+      </div>
+    
     </div>
     
   )

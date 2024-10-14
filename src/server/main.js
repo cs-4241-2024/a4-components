@@ -2,57 +2,45 @@ import express from  'express'
 import ViteExpress from 'vite-express'
 
 const app = express()
-
-const appdata = [
-  { name:'buy groceries', price: '3', quantity: '2', completed:false }
+let numId = 1;
+let todos = [
+  { name:'buy groceries', price: '3', quantity: '2', tcost:6,  completed:false, id: 0 }
 ]
 
 app.use(express.json())
 
-app.get('/read', (req, res) => res.json(appdata))
+app.get('/read', (req, res) => res.json(todos))
 
 app.post('/add', (req,res) => {
-  appdata.push(req.body)
-  res.json(appdata)
+  req.body.id = numId;
+  numId++;
+  todos.push(req.body)
+  res.json(todos)
 })
 
-app.post('/change', function(req,res) {
-  const idx = appdata.findIndex(v => v.name === req.body.name);
-  appdata[idx].price = req.body.price;
-  appdata[idx].quantity = req.body.quantity;
-  appdata[idx].tcost = req.body.quantity * req.body.price;
-  appdata[idx].completed = req.body.completed;
+app.post('')
+
+app.put('/change*', function(req,res) {
+  const idx = todos.findIndex(v => v.id === req.body.id);
+  console.log("req name: ", req.body.name);
+  console.log("id: ", idx);
+
+  todos[idx].name = req.body.name;
+  todos[idx].price = req.body.price;
+  todos[idx].quantity = req.body.quantity;
+  todos[idx].tcost = req.body.quantity * req.body.price;
+  todos[idx].completed = req.body.completed;
   
-  res.sendStatus(200)
+  res.json(todos);
 })
 
-app.delete('/delete', function(req,res) { // function for handling DELETE request
+app.delete('/delete*', function(req,res) { // function for handling DELETE request
   const id = parseInt(req.url.split("/")[2], 10); // splits url to get path
   console.log(`Deleting entry with ID: ${id}`);
 
-  appdata = appdata.filter((entry) => entry.id !== id);
+  todos = todos.filter((entry) => entry.id !== id);
   res.writeHead(200, "OK", { "Content-Type": "application/json" });
-  res.end(JSON.stringify(appdata));
-});
-
-app.put('/edit*', function(req, res) { // function for handling PUT request
-  const id = parseInt(req.url.split("/")[2], 10);
-  const updatedEntry = res.json();
-  //let dataString = "";
-
-  // req.on("data", function(data) {
-  //   dataString += data;
-  // });
-  
-  //request.on("end", function() { // update table info
-  //updatedEntry = JSON.parse(dataString); // parse new received datastring
-    const entryIndex = appdata.findIndex((entry) => entry.id === id);
-    updatedEntry.total = updatedEntry.price * updatedEntry.quantity; // calculate total cost
-    
-    appdata[entryIndex] = {id, ...updatedEntry}; // update the table entry
-    console.log("Updated entry:", appdata[entryIndex]);
-    response.writeHead(200, "OK", {"Content-Type": "application/json"});
-    response.end(JSON.stringify(appdata));
+  res.end(JSON.stringify(todos));
 });
 
 
