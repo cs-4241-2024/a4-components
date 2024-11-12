@@ -34,6 +34,9 @@ body {
   width: 80%;
   margin: 20px auto;
   border-collapse: collapse;
+  font-weight: bold;
+  color: black;
+  font-size: 1.2em;
 }
 
 .centered-table th, .centered-table td {
@@ -42,4 +45,5 @@ body {
 
 .centered-table th {
   font-weight: bold;
+  color: dimgray;
 }
