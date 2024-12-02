@@ -1,0 +1,123 @@
+/* App.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7f6;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+.container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 0.5em;
+}
+
+p {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+form {
+  margin-top: 1em;
+}
+
+form ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+form li {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+form label {
+  flex: 1;
+  font-weight: bold;
+  color: #333;
+}
+
+form input, form textarea {
+  flex: 3;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+form button {
+  padding: 10px 15px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+table th {
+  background-color: #007BFF;
+  color: white;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.actions .edit-btn {
+  background-color: #ffc107;
+}
+
+.actions .edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.actions .delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.actions .delete-btn:hover {
+  background-color: #c82333;
+}
