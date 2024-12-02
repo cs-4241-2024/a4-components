@@ -1,33 +1,13 @@
-Assignment 4 - Components
-===
 
-Due: September 30th, by 11:59 AM.
+## Inflation Over Time
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+https://a4-ryan-wright.glitch.me/
 
-[Svelte Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-2024/cs-4241-2024.github.io/blob/main/using.react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+My project here is a basic application that displays two forms and a table, where the user may enter a 
+product, the year the product was released, and the initial cost of the product, and the table will
+then display a list of products entered by the user, reflecting their current cost today given the year
+of release and the initial cost of the product. I decided to change A2 instead of A3, simply because there was less to change on A2. In my opinion, the new technology definitely hindered the development experience. I found it much more difficult transitioning to using React compared to the previous development technologies. Additionally, I had a lot of trouble trying to get my application to run in
+Glitch, and I still haven't gotten it running in Glitch yet - it runs through vite-express-project in
+the VSCode terminal but I haven't gotten it running through Glitch. I tried using some of the suggestions
+in the Discord but I ended up getting more errors - probably messed something up in VSCode before I
+imported to Glitch.
