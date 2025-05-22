@@ -1,0 +1,103 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif; 
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+#big-title {
+  font-size: 40px;
+  font-family: 'Orbitron', monospace; 
+  font-weight: bold;
+  color: #FFFAE3;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  margin: 20px 0;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: rgba(130, 212, 206, 0.9); /* Add transparency */
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+legend {
+  font-family: 'Orbitron', monospace;
+  font-size: 20px;
+  color: #333;
+}
+
+.table-label {
+  font-size: 24px;
+  font-family: 'Orbitron', monospace;
+  color: #fff;
+  background-color: #282828;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.table {
+  font-family: 'Roboto', sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+th {
+  background-color: #FC7550;
+  color: white;
+}
+
+tbody {
+  text-align: left;
+}
+
+#wrapper {
+  display: flex;
+  gap: 20px; /* Add spacing between flex items */
+  margin: 20px 0;
+}
+
+#left-edit {
+  flex: 0 0 45%;
+  padding: 10px;
+  background-color: rgba(240, 240, 240, 0.7);
+  border-radius: 8px;
+}
+
+#right-edit {
+  flex: 1;
+  padding: 10px;
+  background-color: rgba(240, 240, 240, 0.7);
+  border-radius: 8px;
+}
+
+button {
+  font-family: 'Orbitron', monospace;
+  background-color: #fff;
+  color: #FC7550;
+  border: 2px solid #FC7550;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #FC7550;
+  color: #fff;
+  transform: scale(1.05);
+}
